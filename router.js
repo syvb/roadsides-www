@@ -28,7 +28,7 @@ window.onload = function() {
       try {
         document.getElementById(location.hash.replace(/[^a-zA-Z ]/g, "")).className += "active";
       } catch (e) {}
-      
+
     }
   };
   Roadsides.Router.highlightActive();
@@ -36,7 +36,7 @@ window.onload = function() {
     var allLinks = document.getElementsByTagName("a");
     for (i = 0; i < allLinks.length; i++) {
       allLinks[i].addEventListener("click", Roadsides.Router.update);
-    } 
+    }
   } else {
     window.onpopstate = Roadsides.Router.update;
   }
