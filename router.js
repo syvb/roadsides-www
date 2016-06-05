@@ -1,4 +1,5 @@
 var Roadsides = window.Roadsides || {};
+Roadsides.API_LOC = ""; //set to location of API server
 window.onload = function() {
   Roadsides.Router = {
     update: function() {
@@ -13,9 +14,20 @@ window.onload = function() {
       pageName = pageName.replace(/[^a-zA-Z ]/g, "");
       var request = new XMLHttpRequest();
       request.addEventListener("load", function(data) {
-        var html = data.target.responseText;
-        document.getElementById("mainContent").innerHTML = html;
-        Roadsides.Router.highlightActive();
+        if (data.target.status === 404) {
+          return;
+        } else if (data.target.status === 200) {
+          var html = data.target.responseText;
+          document.getElementById("mainContent").innerHTML = html;
+          Roadsides.Router.highlightActive();
+        } else if (data.target.status === 500 || data.target.status === 501 || data.target.status === 503) {
+          document.getElementById("mainContent").innerHTML = "Sorry - we're having problems right now. Please try again later.";
+          throw "server error";
+        } else {
+          //???
+          document.getElementById("mainContent").innerHTML = "Sorry - we're having problems right now. Please try again later.";
+          throw "invalid status code - " + data.target.status;
+        }
       });
       request.open("GET", "templates/" + pageName + ".temp");
       request.send();
