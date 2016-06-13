@@ -63,14 +63,21 @@
     </div>
     <!--roadside template-->
     <script id="roadside-template" type="text/x-handlebars-template">
-      <img src="{{url}}.jpg" alt="{{name}}" />
+      <img src="images/{{url}}.jpg" alt="{{name}}" />
       <br />
-      {{city}}, {{province}}
+      {{name}}
       <br />
+      {{#if description}}
       {{description}}
+      <br />
+      {{/if}}
+      Location: {{city}}, {{province}}{{#if location}} - {{location}}{{/if}}{{#if gps}} - <a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>{{/if}}
+      <br />
+      {{#if credit}}Credit: {{{credit}}}{{/if}}
     </script>
     <article id="mainContent" class="text-center">
-      <!--main content loaded here by script-->
+      <!--main content loaded here by script - just a filler image-->
+      <img src="imgs/dummycontent.jpg" alt="Loading..." />
     </article>
   </body>
 </html>
