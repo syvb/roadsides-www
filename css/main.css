@@ -1,3 +1,11 @@
 #mainContent {
   margin-left: 1%;
 }
+
+.navbar-nav>li {
+  margin-left: 5%;
+}
+
+.navbar-nav {
+  width: 100%;
+}
