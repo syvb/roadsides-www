@@ -9,3 +9,8 @@
 .navbar-nav {
   width: 100%;
 }
+
+#headerImg {
+  height: 10%;
+  width: auto;
+}
