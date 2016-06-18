@@ -16,3 +16,8 @@
   height: 15em;
   width: auto;
 }
+
+footer {
+  /*http://howtocenterincss.com/#contentType=text&content.text.lines=1&horizontal=center&vertical=middle&browser.IE=none*/
+display:flex;justify-content:center;align-items:center;
+}
