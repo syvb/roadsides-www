@@ -1,5 +1,5 @@
 var Roadsides = window.Roadsides || {};
-Roadsides.API_LOC = "http://localhost:8081/"; //set to location of API server
+Roadsides.API_LOC = "//" + window.location.hostname + ":8081/"; //set to location of API server
 window.onload = function() {
   Roadsides.ROADSIDE_TEMPLATE = Handlebars.compile(document.getElementById("roadside-template").innerHTML);
   Roadsides.Router = {
