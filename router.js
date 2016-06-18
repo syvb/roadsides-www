@@ -60,7 +60,7 @@ window.onload = function() {
   Roadsides.Router.highlightActive();
   if (window.onpopstate !== null) {
     var allLinks = document.getElementsByTagName("a");
-    for (i = 0; i < allLinks.length; i++) {
+    for (var i = 0; i < allLinks.length; i++) {
       allLinks[i].addEventListener("click", Roadsides.Router.update);
     }
   } else {
