@@ -55,7 +55,7 @@ window.onload = function() {
         document.getElementById(location.hash.replace(/[^a-zA-Z ]/g, "")).className += "active";
       } catch (e) {}
 
-    }
+    },
   };
   Roadsides.Router.highlightActive();
   if (window.onpopstate !== null) {
@@ -66,5 +66,13 @@ window.onload = function() {
   } else {
     window.onpopstate = Roadsides.Router.update;
   }
+  document.getElementById("province").addEventListener("change", function () {
+    var selected = document.getElementById("province").value;
+    if ((location.hash.replace("/", "") === selected) || (selected === "none")) {
+      return;
+    }
+    location.hash = selected;
+    Roadsides.Router.update();
+  });
   Roadsides.Router.update();
 };

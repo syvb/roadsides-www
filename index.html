@@ -1,90 +1,90 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Roadside Attractions</title>
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<head>
+  <title>Roadside Attractions</title>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/main.css" />
-    <script src="handlebars.js"></script>
-    <script src="router.js"></script>
-  </head>
-  <body>
-    <header>
-      <img src="imgs/header.svg" alt="Roadside Attractions" id="headerImg"/>
-      <nav class="navbar navbar-default" class="center-block">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/main.css" />
+  <script src="handlebars.js"></script>
+  <script src="router.js"></script>
+</head>
+
+<body>
+  <header>
+    <img src="imgs/header.svg" alt="Roadside Attractions" id="headerImg" />
+    <nav class="navbar navbar-default" class="center-block">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li id="main"><a href="#/main">Home</a></li>
-              <li id="about"><a href="#/about">About</a></li>
-              <li id="contact"><a href="#/contact">Send Pictures</a></li>
-              <li id="founder"><a href="#/founder">Our Founder</a></li>
-              <li><a href="https://www.facebook.com/canadianroadsides">Facebook</a></li>
-              <li><a href="https://twitter.com/Roadside_Canada">Twitter</a></li>
-            </ul>
-          </div>
         </div>
-      </nav>
-    </header>
-    <div class="col-sm-3 col-md-2 sidebar">
-      <li><a href="#/province">By Province</a></li>
-      <li><a href="#/alberta">Alberta</a></li>
-      <li><a href="#/bc">British Columbia</a></li>
-      <li><a href="#/manitoba">Manitoba</a></li>
-      <li><a href="#/newbrunswick">New Brunswick</a></li>
-      <li><a href="#/nfld">Newfoundland and Labrador</a></li>
-      <li><a href="#/nwt">Northwest Territories</a></li>
-      <li><a href="#/novascotia">Nova Scotia</a></li>
-      <li><a href="#/nunavut">Nunavut</a></li>
-      <li><a href="#/ontario">Ontario</a></li>
-      <li><a href="#/pei">Prince Edward Island</a></li>
-      <li><a href="#/quebec">Quebec</a></li>
-      <li><a href="#/sask">Saskatchewan</a></li>
-      <li><a href="#/yukon">Yukon</a></li>
-      <br />
-      <li><a href="#/alphabet">Alphabetical</a></li>
-      <li><a href="#/type">By Type</a></li>
-      <li><a href="#/random">Random</a></li>
-      <br />
-      <li><a href="#/pop">Planes On Pedestals</a></li>
-    </div>
-    <!--roadside template-->
-    <script id="roadside-template" type="text/x-handlebars-template">
-      <img src="images/{{url}}.jpg" alt="{{name}}" />
-      <br />
-      {{name}}
-      <br />
-      {{#if description}}
-      {{description}}
-      <br />
-      {{/if}}
-      Location: {{city}}, {{province}}{{#if location}} - {{location}}{{/if}}{{#if gps}} - <a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>{{/if}}
-      <br />
-      {{#if credit}}Credit: {{{credit}}}{{/if}}
-    </script>
-    <article id="mainContent" class="text-center">
-      <!--main content loaded here by script - just a filler image-->
-      <img src="imgs/dummycontent.jpg" alt="Loading..." />
-    </article>
-    <br><br><br>
-    <footer>
-      <small><p>Copyright &copy; 2016 Large Canadian Roadside Attractions.</p></small>
-    </footer>
-    <br><br>
-  </body>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="main"><a href="#/main">Home</a></li>
+            <li id="about"><a href="#/about">About</a></li>
+            <li id="contact"><a href="#/contact">Send Pictures</a></li>
+            <li id="founder"><a href="#/founder">Our Founder</a></li>
+            <li><a href="https://www.facebook.com/canadianroadsides">Facebook</a></li>
+            <li><a href="https://twitter.com/Roadside_Canada">Twitter</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="col-sm-3 col-md-2 sidebar">
+    <li><a href="#/province">By Province</a></li>
+    <select id="province">
+      <option value="none">Select A Province...</option>
+      <option value="alberta">Alberta</option>
+      <option value="bc">British Columbia</option>
+      <option value="manitoba">Manitoba</option>
+      <option value="newbrunswick">New Brunswick</option>
+      <option value="nfld">Newfoundland and Labrador</option>
+      <option value="nwt">Northwest Territories</option>
+      <option value="novascotia">Nova Scotia</option>
+      <option value="nunavut">Nunavut</option>
+      <option value="ontario">Ontario</option>
+      <option value="pei">Prince Edward Island</option>
+      <option value="quebec">Quebec</option>
+      <option value="sask">Saskatchewan</option>
+      <option value="yukon">Yukon</option>
+      </select>
+    <br />
+    <li><a href="#/alphabet">Alphabetical</a></li>
+    <li><a href="#/type">By Type</a></li>
+    <li><a href="#/random">Random</a></li>
+    <br />
+    <li><a href="#/pop">Planes On Pedestals</a></li>
+  </div>
+  <!--roadside template-->
+  <script id="roadside-template" type="text/x-handlebars-template">
+    <img src="images/{{url}}.jpg" alt="{{name}}" />
+    <br /> {{name}}
+    <br /> {{#if description}} {{description}}
+    <br /> {{/if}} Location: {{city}}, {{province}}{{#if location}} - {{location}}{{/if}}{{#if gps}} - <a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>{{/if}}
+    <br /> {{#if credit}}Credit: {{{credit}}}{{/if}}
+  </script>
+  <article id="mainContent" class="text-center">
+    <!--main content loaded here by script - just a filler image-->
+    <img src="imgs/dummycontent.jpg" alt="Loading..." />
+  </article>
+  <br><br><br>
+  <footer>
+    <small><p>Copyright &copy; 2016 Large Canadian Roadside Attractions.</p></small>
+  </footer>
+  <br><br>
+</body>
+
 </html>
