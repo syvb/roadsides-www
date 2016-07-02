@@ -66,13 +66,17 @@ window.onload = function() {
   } else {
     window.onpopstate = Roadsides.Router.update;
   }
-  document.getElementById("province").addEventListener("change", function () {
-    var selected = document.getElementById("province").value;
-    if ((location.hash.replace("/", "") === selected) || (selected === "none")) {
-      return;
-    }
-    location.hash = selected;
-    Roadsides.Router.update();
-  });
+  var dropdownlinks = document.getElementsByClassName("dropdownlinks");
+  for (i = 0; i < dropdownlinks.length; i++) {
+      dropdownlinks[i].addEventListener("change", function (e) {
+      var selected = e.target.value;
+      if ((location.hash.replace("/", "") === selected) || (selected === "none")) {
+        return;
+      }
+      location.hash = "/" + selected;
+      Roadsides.Router.update();
+    });
+  }
+  document.getElementById("province")
   Roadsides.Router.update();
 };
