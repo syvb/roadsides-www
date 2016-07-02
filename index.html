@@ -72,7 +72,7 @@
   </div>
   <!--roadside template-->
   <script id="roadside-template" type="text/x-handlebars-template">
-    <img src="images{{url}}.jpg" alt="{{name}}" />
+    <img src="images{{url}}.jpg" alt="{{name}}" class="roadsideImage" />
     <br /> {{name}}
     <br /> {{#if description}} {{description}}
     <br /> {{/if}} Location: {{city}}, {{province}}{{#if location}} - {{location}}{{/if}}{{#if gps}} - <a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>{{/if}}

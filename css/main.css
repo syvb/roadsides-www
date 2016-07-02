@@ -21,3 +21,8 @@ footer {
   /*http://howtocenterincss.com/#contentType=text&content.text.lines=1&horizontal=center&vertical=middle&browser.IE=none*/
 display:flex;justify-content:center;align-items:center;
 }
+
+.roadsideImage {
+  position: relative;
+  left: -8.333333335%;
+}
