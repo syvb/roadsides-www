@@ -57,14 +57,24 @@ window.onload = function() {
     },
     loadPage: function(pageName) {
       pageName = pageName.replace(/[^a-zA-Z0-9]/g, "");
+      doneFuncCalled = false;
       var currRouteFunc = 0;
       //go through routing table
       var fail = function () {};
       fail = function() {
         currRouteFunc += 1;
+        startFuncNum = currRouteFunc;
         Roadsides.Router.routeTable[currRouteFunc](pageName, fail);
+        if (!doneFuncCalled) {
+          doneFuncCalled = true;
+          pageLoaded();
+        }
       };
       Roadsides.Router.routeTable[0](pageName, fail);
+      if (!doneFuncCalled) {
+        doneFuncCalled = true;
+        pageLoaded();
+      }
     },
     highlightActive: function() {
       var activeEles = document.getElementsByClassName("active");
