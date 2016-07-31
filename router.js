@@ -41,6 +41,10 @@ window.onload = function() {
         });
         request.open("GET", "templates/" + pageName + ".temp");
         request.send();
+      },
+      //404
+      function(pageName,fail) {
+        document.getElementById("mainContent").innerHTML = "The page you were looking for does not exist at this time.";
       }
     ],
     update: function() {
