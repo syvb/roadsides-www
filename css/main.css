@@ -10,6 +10,14 @@
   width: 100%;
 }
 
+.sidebar>ul>li {
+  margin-top: 1em;
+}
+
+.sidebar>ul:first-child {
+  margin-top: 4em;
+}
+
 #headerImg {
   margin-top: 1em;
   margin-left: 5em;
@@ -25,4 +33,5 @@ display:flex;justify-content:center;align-items:center;
 .roadsideImage {
   position: relative;
   left: -8.333333335%;
+  width: 33%;
 }
