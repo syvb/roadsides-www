@@ -65,16 +65,8 @@ window.onload = function() {
         currRouteFunc += 1;
         startFuncNum = currRouteFunc;
         Roadsides.Router.routeTable[currRouteFunc](pageName, fail);
-        if (!doneFuncCalled) {
-          doneFuncCalled = true;
-          pageLoaded();
-        }
       };
       Roadsides.Router.routeTable[0](pageName, fail);
-      if (!doneFuncCalled) {
-        doneFuncCalled = true;
-        pageLoaded();
-      }
     },
     highlightActive: function() {
       var activeEles = document.getElementsByClassName("active");
