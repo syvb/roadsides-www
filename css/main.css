@@ -1,5 +1,7 @@
 #mainContent {
   margin-left: 1%;
+  position: absolute;
+  left: 38.75vw;
 }
 
 .navbar-nav>li {
@@ -25,13 +27,13 @@
   width: auto;
 }
 
-footer {
-  /*http://howtocenterincss.com/#contentType=text&content.text.lines=1&horizontal=center&vertical=middle&browser.IE=none*/
-display:flex;justify-content:center;align-items:center;
+.roadsideImage {
+  width: 30vw;
 }
 
-.roadsideImage {
-  position: relative;
-  left: -8.333333335%;
-  width: 33%;
+footer>small {
+  margin-left: 2em;
+  color: lightgrey;
+  opacity: 0.5;
+  pointer-events: none;
 }
