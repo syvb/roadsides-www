@@ -37,3 +37,10 @@ footer>small {
   opacity: 0.5;
   pointer-events: none;
 }
+
+@media only screen and (min-device-width: 320px) and (orientation: portrait) {
+  .sidebar>ul>li {
+    margin-top: 3em;
+    font-size: 2em;
+  }
+}
