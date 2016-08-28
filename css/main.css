@@ -44,3 +44,17 @@ footer>small {
     font-size: 2em;
   }
 }
+
+#googlecse {
+  width: 20%; 
+  padding-top: 1%;
+}
+
+input.gsc-input,
+.gsc-input-box,
+.gsc-input-box-hover,
+.gsc-input-box-focus,
+.gsc-search-button {
+    box-sizing: content-box; 
+    line-height: normal;
+}
