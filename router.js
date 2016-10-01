@@ -22,7 +22,7 @@ window.onload = function() {
           var roadsideData = JSON.parse(dbData.target.responseText)[0];
           console.log(roadsideData);
           var html = Roadsides.ROADSIDE_TEMPLATE(roadsideData);
-          document.getElementById("mainContent").innerHTML = html;
+          document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
           Roadsides.Router.highlightActive();
         });
         dbRequest.open("GET", Roadsides.API_LOC + "roadsides?url=/" + pageName);
@@ -36,7 +36,7 @@ window.onload = function() {
             return fail();
           }
           var html = data.target.responseText;
-          document.getElementById("mainContent").innerHTML = html;
+          document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
           Roadsides.Router.highlightActive();
         });
         request.open("GET", "templates/" + pageName + ".temp");

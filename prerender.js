@@ -23,7 +23,7 @@ var horseman = new Horseman();
 var output = "An error occured. Please try again later.";
 horseman
   .open(url)
-  .waitForSelector(".roadsideImage", 5000)
+  .waitForSelector(".loaded", 5000)
   .html("html").then(function (html) {
     output = html;
     output = output.split("<!--NO-PRERENDER-->")
