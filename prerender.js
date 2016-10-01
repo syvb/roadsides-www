@@ -5,7 +5,7 @@ var timestamp = Date.now();
 var commandLineArgs = require("command-line-args");
 var fs = require("fs");
 
-const BASE_URL = "https://new-roadside-stuff-smittyvb.c9users.io/#"
+const BASE_URL = "https://new-roadside-stuff-smittyvb.c9users.io:8082/#";
 const optionDefinitions = [
   { name: 'all', alias: 'a', type: Boolean },
   { name: 'file', type: String, defaultOption: true },
