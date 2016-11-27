@@ -65,12 +65,25 @@ window.onload = function() {
         //query the database
         var request = new XMLHttpRequest();
         request.onload = function (data) {
-          //data.target.responseText is the response
           var dbJson = JSON.parse(data.target.responseText);
           var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
           document.getElementById("mainContent").innerHTML = html;
         };
         request.open("GET", Roadsides.API_LOC + "roadsides?province=" + Roadsides.Router.provinceUrlMapping[pageName]);
+        request.send();
+      },
+      //alphabetical page
+      function (pageName, fail) {
+        if (pageName.length !== 1) {
+          return fail();
+        }
+        var request = new XMLHttpRequest();
+        request.onload = function (data) {
+          var dbJson = JSON.parse(data.target.responseText);
+          var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
+          document.getElementById("mainContent").innerHTML = html;
+        };
+        request.open("GET", Roadsides.API_LOC + "roadsides?name_like=^" + pageName);
         request.send();
       },
       //static page
