@@ -69,7 +69,7 @@ window.onload = function() {
           var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
           document.getElementById("mainContent").innerHTML = html;
         };
-        request.open("GET", Roadsides.API_LOC + "roadsides?province=" + Roadsides.Router.provinceUrlMapping[pageName]);
+        request.open("GET", Roadsides.API_LOC + "roadsides?province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=name");
         request.send();
       },
       //alphabetical page
@@ -83,7 +83,7 @@ window.onload = function() {
           var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
           document.getElementById("mainContent").innerHTML = html;
         };
-        request.open("GET", Roadsides.API_LOC + "roadsides?name_like=^" + pageName);
+        request.open("GET", Roadsides.API_LOC + "roadsides?name_like=^" + pageName + "&_sort=name");
         request.send();
       },
       //static page
