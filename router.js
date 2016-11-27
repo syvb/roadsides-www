@@ -27,11 +27,15 @@ window.onload = function() {
       "yukon": "Yukon"
     },
     htmlFromRoadsideArray: function (array) {
-      var html = "<ul class='roadsideList'>";
+      var html = "<table>";
       array.forEach(function (roadside) {
-        html += '<li><a href="'  + roadside.url + '">' + roadside.name + ' - ' + roadside.city + ', ' + roadside.province + '</a></li>';
+        html += '<tr>';
+        html += '<td><img src="images/' + roadside.url + '.jpg" height="100" /></td>';
+        html += '<td>&nbsp;&nbsp;&nbsp;</td>'
+        html += '<td><a href="#'  + roadside.url + '">' + roadside.name + ' - ' + roadside.city + ', ' + roadside.province + '</a></td>';
+        html += '</tr>';
       });
-      html += "</ul>";
+      html += "</table>";
       return html;
     },
     routeTable: [
