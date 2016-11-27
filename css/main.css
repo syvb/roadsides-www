@@ -64,6 +64,6 @@ input.gsc-input,
   padding-left: 18em;
 }
 
-.static > h1 {
+#mainContent > h1 {
   padding-left: 1em;
 }
