@@ -86,6 +86,19 @@ window.onload = function() {
         request.open("GET", Roadsides.API_LOC + "roadsides?name_like=^" + pageName + "&_sort=name");
         request.send();
       },
+      function (pageName, fail) {
+        if (pageName !== "all") {
+          return fail();
+        }
+        var request = new XMLHttpRequest();
+        request.onload = function (data) {
+          var dbJson = JSON.parse(data.target.responseText);
+          var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
+          document.getElementById("mainContent").innerHTML = html;
+        };
+        request.open("GET", Roadsides.API_LOC + "roadsides?_sort=name");
+        request.send();
+      },
       //static page
       function(pageName, fail) {
         var request = new XMLHttpRequest();
