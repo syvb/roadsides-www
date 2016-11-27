@@ -67,7 +67,7 @@ window.onload = function() {
         request.onload = function (data) {
           var dbJson = JSON.parse(data.target.responseText);
           var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
-          document.getElementById("mainContent").innerHTML = "<h1>By Province - " + Roadsides.Router.provinceUrlMapping[pageName] + "</h1>" + html;
+          document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>By Province - " + Roadsides.Router.provinceUrlMapping[pageName] + "</h1>" + html;
         };
         request.open("GET", Roadsides.API_LOC + "roadsides?province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=name");
         request.send();
@@ -81,7 +81,7 @@ window.onload = function() {
         request.onload = function (data) {
           var dbJson = JSON.parse(data.target.responseText);
           var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
-          document.getElementById("mainContent").innerHTML = "<h1>Alphabetical - " + pageName + "</h1>" + html;
+          document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>Alphabetical - " + pageName + "</h1>" + html;
         };
         request.open("GET", Roadsides.API_LOC + "roadsides?name_like=^" + pageName + "&_sort=name");
         request.send();
@@ -94,7 +94,7 @@ window.onload = function() {
         request.onload = function (data) {
           var dbJson = JSON.parse(data.target.responseText);
           var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
-          document.getElementById("mainContent").innerHTML = "<h1>All Roadside Attractions</h1>" + html;
+          document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>All Roadside Attractions</h1>" + html;
         };
         request.open("GET", Roadsides.API_LOC + "roadsides?_sort=name");
         request.send();
@@ -107,7 +107,7 @@ window.onload = function() {
         request.onload = function (data) {
           var dbJson = JSON.parse(data.target.responseText);
           var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
-          document.getElementById("mainContent").innerHTML = "<h1>Archive</h1>" + html;
+          document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>Archive</h1>" + html;
         };
         request.open("GET", Roadsides.API_LOC + "roadsides?_sort=name&archive=true");
         request.send();
