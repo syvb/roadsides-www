@@ -59,3 +59,11 @@ input.gsc-input,
     box-sizing: content-box; 
     line-height: normal;
 }
+
+.static {
+  padding-left: 18em;
+}
+
+.static > h1 {
+  padding-left: 1em;
+}

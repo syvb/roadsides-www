@@ -82,7 +82,7 @@ window.onload = function() {
           }
           var html = data.target.responseText;
           document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
-          document.getElementById("mainContent").className = "static text-center";
+          document.getElementById("mainContent").className = "static";
           Roadsides.Router.highlightActive();
         });
         request.open("GET", "templates/" + pageName + ".temp");
