@@ -13,6 +13,7 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/main.css" />
+  <script src="polyfills.js"></script>
   <!--NO-PRERENDER-->
   <script src="handlebars.js"></script>
   <script src="router.js"></script>
@@ -92,10 +93,12 @@
   <!--roadside template-->
   <script id="roadside-template" type="text/x-handlebars-template">
     <img src="images{{url}}.jpg" alt="{{name}}" class="roadsideImage" />
-    <br /> {{name}}
-    <br /> {{#if description}} {{description}}
-    <br /> {{/if}} Location: {{city}}, {{province}}{{#if location}} - {{location}}{{/if}}{{#if gps}} - <a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>{{/if}}
-    <br /> {{#if credit}}Credit: {{{credit}}}{{/if}}
+    <div id="about">
+      <br /> {{name}}
+      <br /> {{#if description}} {{description}}
+      <br /> {{/if}} Location: {{city}}, {{province}}{{#if location}} - {{location}}{{/if}}{{#if gps}} - <a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>{{/if}}
+      <br /> {{#if credit}}Credit: {{{credit}}}{{/if}}
+    </div>
   </script>
   <article id="mainContent" class="text-center">
     <!--main content loaded here by script - just a filler image-->

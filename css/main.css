@@ -1,9 +1,10 @@
-#mainContent {
-  margin-left: 1%;
-  position: absolute;
-  left: 38.75vw;
+.roadsideImage {
+  position: relative;
+  left: -8.333333335%;
 }
-
+.dropdownlinks {
+  width: 100%;
+}
 .navbar-nav>li {
   margin-left: 5%;
 }
@@ -28,7 +29,7 @@
 }
 
 .roadsideImage {
-  width: 30vw;
+  width: 33%;
 }
 
 footer>small {

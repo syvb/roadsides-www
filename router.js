@@ -11,6 +11,29 @@ These functions are responsible for setting the HTML code.
 window.onload = function() {
   Roadsides.ROADSIDE_TEMPLATE = Handlebars.compile(document.getElementById("roadside-template").innerHTML);
   Roadsides.Router = {
+    provinceUrlMapping: {
+      "alberta": "Alberta",
+      "bc": "British Columbia",
+      "manitoba": "manitoba",
+      "newbrunswick": "New Brunswick",
+      "nfld": "Newfoundland and Labrador",
+      "nwt": "Northwest Territories",
+      "novascotia": "Nova Scotia",
+      "nunavut": "Nunavut",
+      "ontario": "Ontario",
+      "pei": "Prince Edward Island",
+      "quebec": "Quebec",
+      "sask": "Saskatchewan",
+      "yukon": "Yukon"
+    },
+    htmlFromRoadsideArray: function (array) {
+      var html = "<ul class='roadsideList'>";
+      array.forEach(function (roadside) {
+        html += '<li><a href="'  + roadside.url + '">' + roadside.name + ' - ' + roadside.city + ', ' + roadside.province + '</a></li>';
+      });
+      html += "</ul>";
+      return html;
+    },
     routeTable: [
       //roadside page
       function(pageName, fail) {
@@ -23,10 +46,28 @@ window.onload = function() {
           console.log(roadsideData);
           var html = Roadsides.ROADSIDE_TEMPLATE(roadsideData);
           document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
+          document.getElementById("mainContent").className = "roadside text-center";
           Roadsides.Router.highlightActive();
         });
         dbRequest.open("GET", Roadsides.API_LOC + "roadsides?url=/" + pageName);
         dbRequest.send();
+      },
+      //province page
+      function(pageName, fail) {
+        //make sure we have a valid province url
+        if (Roadsides.Router.provinceUrlMapping[pageName] === undefined) {
+          return fail();
+        }
+        //query the database
+        var request = new XMLHttpRequest();
+        request.onload = function (data) {
+          //data.target.responseText is the response
+          var dbJson = JSON.parse(data.target.responseText);
+          var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
+          document.getElementById("mainContent").innerHTML = html;
+        };
+        request.open("GET", Roadsides.API_LOC + "roadsides?province=" + Roadsides.Router.provinceUrlMapping[pageName]);
+        request.send();
       },
       //static page
       function(pageName, fail) {
@@ -37,6 +78,7 @@ window.onload = function() {
           }
           var html = data.target.responseText;
           document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
+          document.getElementById("mainContent").className = "static text-center";
           Roadsides.Router.highlightActive();
         });
         request.open("GET", "templates/" + pageName + ".temp");
