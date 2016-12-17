@@ -1,4 +1,4 @@
 images/*
 test.html
-roadside-to-json/roadsides.csv
-roadside-to-json/processed.json
+roadside-to-json/io/*
+roadside-to-json/csvtojson.json
