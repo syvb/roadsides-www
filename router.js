@@ -27,12 +27,12 @@ window.onload = function() {
       "yukon": "Yukon"
     },
     htmlFromRoadsideArray: function (array) {
-      var html = "<table>";
+      var html = "<table class ='roadsideList'>";
       array.forEach(function (roadside) {
         html += '<tr>';
-        html += '<td><img src="http://smittyvb.github.io/roadsides' + roadside.url + '.jpg" height="100" /></td>';
-        html += '<td>&nbsp;&nbsp;&nbsp;</td>'
-        html += '<td><a href="#'  + roadside.url + '">' + roadside.name + ' - ' + roadside.city + ', ' + roadside.province + '</a></td>';
+        html += '<td class="listImage"><img src="http://smittyvb.github.io/roadsides' + roadside.url + '.jpg" height="100" /></td>';
+        //html += '<td>&nbsp;&nbsp;&nbsp;</td>'
+        html += '<td class="listTitle"><a href="#'  + roadside.url + '">' + roadside.name + ' <br /> ' + roadside.city + ', ' + roadside.province + '</a></td>';
         html += '</tr>';
       });
       html += "</table>";

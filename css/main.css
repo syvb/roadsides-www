@@ -67,3 +67,22 @@ input.gsc-input,
 #mainContent > h1 {
   padding-left: 1em;
 }
+
+.roadsideList td {
+  border: .5em solid #eeeeee;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+
+.listTitle {
+  border-left: none !important;
+  text-align: left;
+  padding-right: 1em;
+  width: 35em;
+}
+
+.listImage {
+  border-right: none !important;
+  width: 300px;
+}
