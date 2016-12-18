@@ -30,7 +30,7 @@ window.onload = function() {
       var html = "<table>";
       array.forEach(function (roadside) {
         html += '<tr>';
-        html += '<td><img src="images/' + roadside.url + '.jpg" height="100" /></td>';
+        html += '<td><img src="http://smittyvb.github.io/roadsides' + roadside.url + '.jpg" height="100" /></td>';
         html += '<td>&nbsp;&nbsp;&nbsp;</td>'
         html += '<td><a href="#'  + roadside.url + '">' + roadside.name + ' - ' + roadside.city + ', ' + roadside.province + '</a></td>';
         html += '</tr>';
