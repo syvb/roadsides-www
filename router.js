@@ -1,5 +1,5 @@
 var Roadsides = window.Roadsides || {};
-Roadsides.API_LOC = "//" + window.location.hostname + ":8081/"; //set to location of API server
+Roadsides.API_LOC = "https://new-roadside-stuff-smittyvb.c9users.io:8081/"; //set to location of API server
 /*
 Each item in the routing table is evaluated, in order from top to bottom.
 If one succeeds, then the program stop going through the table.
@@ -8,7 +8,7 @@ Each function is also passed the name of the current page, in order to get the c
 These functions are responsible for setting the HTML code.
 */
 
-window.onload = function() {
+addEventListener("load", function() {
   Roadsides.ROADSIDE_TEMPLATE = Handlebars.compile(document.getElementById("roadside-template").innerHTML);
   Roadsides.Router = {
     provinceUrlMapping: {
@@ -175,16 +175,4 @@ window.onload = function() {
   else {
     window.onpopstate = Roadsides.Router.update;
   }
-  var dropdownlinks = document.getElementsByClassName("dropdownlinks");
-  for (i = 0; i < dropdownlinks.length; i++) {
-    dropdownlinks[i].addEventListener("change", function(e) {
-      var selected = e.target.value;
-      if ((location.hash.replace("/", "") === selected) || (selected === "none")) {
-        return;
-      }
-      location.hash = "/" + selected;
-      Roadsides.Router.update();
-    });
-  }
-  Roadsides.Router.update();
-};
+});
