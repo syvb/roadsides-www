@@ -5,9 +5,10 @@ var timestamp = Date.now();
 var commandLineArgs = require("command-line-args");
 var Horseman = require('node-horseman');
 var fse = require("fs-extra");
+var request = require('sync-request');
 
 const BASE_URL = "https://new-roadside-stuff-smittyvb.c9users.io:8082/#";
-const ROADSIDE_LIST = "/home/ubuntu/temp-api/roadsides.json";
+const ROADSIDE_LIST = "http://roadsides-api-new-roadsides.44fs.preview.openshiftapps.com/roadsides";
 const optionDefinitions = [{
   name: 'all',
   alias: 'a',
@@ -77,9 +78,8 @@ else if (options.all) {
   //letters of alphabet
   renderList = renderList.concat("qwertyuiopasdfghjklzxcvbnm".split(""));
   //roadside names
-  JSON.parse(fse.readFileSync(ROADSIDE_LIST, {
-      encoding: "utf-8"
-    })).roadsides
+  console.log(request("GET", ROADSIDE_LIST).body.toString());
+  JSON.parse(request("GET", ROADSIDE_LIST).body.toString())
     .forEach(function(roadside) {
       renderList.push(roadside.url.substr(1, roadside.url.length));
     });

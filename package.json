@@ -2,16 +2,18 @@
   "name": "roadsides-www",
   "version": "0.1.0",
   "description": "",
-  "main": "node prerende.js --all",
+  "main": "node prerender --all",
   "dependencies": {
     "command-line-args": "^3.0.1",
     "fs-extra": "^1.0.0",
     "node-horseman": "^3.1.1",
-    "phantomjs": "^2.1.7"
+    "phantomjs": "^2.1.7",
+    "sync-request": "^3.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node prerender --all"
   },
   "repository": {
     "type": "git",
