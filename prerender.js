@@ -19,6 +19,9 @@ const optionDefinitions = [{
 }, {
   name: 'force',
   type: Boolean
+}, {
+  name: 'index',
+  type: Number
 }];
 const options = commandLineArgs(optionDefinitions);
 if (options.file !== undefined) {
@@ -48,9 +51,22 @@ else if (options.all) {
     "province",
     //all roadsides page
     "all",
+    //province pages
+    "alberta",
+    "bc",
+    "manitoba",
+    "newbrunswick",
+    "nfld",
+    "nwt",
+    "novascotia",
+    "nunavut",
+    "ontario",
+    "pei",
+    "quebec",
+    "sask",
+    "yukon",
     //other
-    "archive",
-    "type"
+    "archive"
   ];
   //letters of alphabet
   renderList = renderList.concat("qwertyuiopasdfghjklzxcvbnm".split(""));
@@ -59,12 +75,12 @@ else if (options.all) {
       encoding: "utf-8"
     })).roadsides
     .forEach(function(roadside) {
-      //renderList.push(roadside.url.substr(1, roadside.url.length));
+      renderList.push(roadside.url.substr(1, roadside.url.length));
     });
   console.log(renderList);
   //render every page
   renderAll(renderList);
-  
+
   //print timestamp
   console.log("Complete.");
   console.log("Took " + Date.now() - timestamp);
@@ -98,7 +114,8 @@ function render(pageUrl, fileName, callback) {
           callback();
         }
       });
-  } catch (e) {
+  }
+  catch (e) {
     console.log("Can't render " + pageUrl);
   }
 }
@@ -106,12 +123,19 @@ function render(pageUrl, fileName, callback) {
 
 function renderAll(toRender, index) {
   if (index === undefined) {
-    index = 0;
+    index = options.index ? options.index : 0;
   }
   if (index === toRender.length) {
     return;
   }
-  render(BASE_URL + toRender[index], toRender[index], function () {
-    renderAll(toRender, index + 1);
-  });
+  var renderCurr = function() {
+    render(BASE_URL + toRender[index], toRender[index], function() {
+      renderAll(toRender, index + 1);
+    });
+  };
+  if ((index % 10) === 0) {
+    setTimeout(renderCurr, 5000);
+  } else {
+    renderCurr();
+  }
 }
