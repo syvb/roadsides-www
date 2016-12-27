@@ -133,7 +133,7 @@ function renderAll(toRender, index) {
       renderAll(toRender, index + 1);
     });
   };
-  if ((index % 10) === 0) {
+  if ((index % 15) === 0) {
     setTimeout(renderCurr, 5000);
   } else {
     renderCurr();
