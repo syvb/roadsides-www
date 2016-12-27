@@ -37,6 +37,12 @@ else if (options.all) {
   fse.removeSync(roadsideTmpFilePath);
   fse.copySync(process.cwd(), roadsideTmpFilePath);
   fse.copySync(roadsideTmpFilePath, "prerendered");
+  fse.removeSync("prerendered/.git");
+  fse.removeSync("prerendered/.c9");
+  fse.removeSync("prerendered/node_modules");
+  fse.removeSync("prerendered/roadside-to-json");
+  fse.removeSync("prerendered/images");
+  fse.removeSync("prerendered/.gitignore");
 
   //delete index.html, and replace it with #/main
   fse.removeSync("prerendered/index.html");
