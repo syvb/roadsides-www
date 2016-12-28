@@ -99,12 +99,20 @@
   </div>
   <!--roadside template-->
   <script id="roadside-template" type="text/x-handlebars-template">
+    <h2>{{name}}</h2> <br />
     <img src="http://smittyvb.github.io/roadsides{{url}}.jpg" alt="{{name}}" class="roadsideImage" />
     <div id="about">
-      <br /> {{name}}
       <br /> {{#if description}} {{description}}
-      <br /> {{/if}} Location: {{city}}, {{province}}{{#if location}} - {{location}}{{/if}}{{#if gps}} - <a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>{{/if}}
-      <br /> {{#if credit}}Credit: {{{credit}}}{{/if}}
+      <br /><br /> {{/if}}{{city}}, {{province}}<br /><br />
+      {{#if location}}
+        {{location}}<br /><br />
+      {{/if}}
+      {{#if gps}}
+        - <a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>
+      {{else}}
+        <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">See Map Of Roadside Attractions</a>
+        {{/if}}<br /><br />
+      {{#if credit}}Credit: {{{credit}}}{{/if}}
     </div>
   </script>
   <article id="mainContent" class="text-center">

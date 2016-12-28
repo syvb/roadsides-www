@@ -92,3 +92,7 @@ input.gsc-input,
   text-align:center; 
   vertical-align:middle;
 }
+
+h2 {
+  text-decoration: underline;
+}
