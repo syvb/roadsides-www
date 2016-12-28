@@ -85,4 +85,6 @@ input.gsc-input,
 .listImage {
   border-right: none !important;
   width: 300px;
+  text-align:center; 
+  vertical-align:middle;
 }
