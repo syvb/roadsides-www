@@ -38,6 +38,16 @@ addEventListener("load", function() {
       html += "</table>";
       return html;
     },
+    dbQuery: function (query, title) {
+      var request = new XMLHttpRequest();
+      request.onload = function (data) {
+        var dbJson = JSON.parse(data.target.responseText);
+        var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
+        document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>" + title + "</h1>" + html;
+      };
+      request.open("GET", Roadsides.API_LOC + "roadsides?" + query);
+      request.send();
+    },
     routeTable: [
       //roadside page
       function(pageName, fail) {
@@ -62,55 +72,28 @@ addEventListener("load", function() {
         if (Roadsides.Router.provinceUrlMapping[pageName] === undefined) {
           return fail();
         }
-        //query the database
-        var request = new XMLHttpRequest();
-        request.onload = function (data) {
-          var dbJson = JSON.parse(data.target.responseText);
-          var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
-          document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>By Province - " + Roadsides.Router.provinceUrlMapping[pageName] + "</h1>" + html;
-        };
-        request.open("GET", Roadsides.API_LOC + "roadsides?province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=name");
-        request.send();
+        Roadsides.Router.dbQuery("province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=name",
+        "By Province - " + Roadsides.Router.provinceUrlMapping[pageName]);
       },
       //alphabetical page
       function (pageName, fail) {
         if (pageName.length !== 1) {
           return fail();
         }
-        var request = new XMLHttpRequest();
-        request.onload = function (data) {
-          var dbJson = JSON.parse(data.target.responseText);
-          var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
-          document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>Alphabetical - " + pageName + "</h1>" + html;
-        };
-        request.open("GET", Roadsides.API_LOC + "roadsides?name_like=^" + pageName + "&_sort=name");
-        request.send();
+        Roadsides.Router.dbQuery("name_like=^" + pageName + "&_sort=name", 
+        "Alphabetical - " + pageName);
       },
       function (pageName, fail) {
         if (pageName !== "all") {
           return fail();
         }
-        var request = new XMLHttpRequest();
-        request.onload = function (data) {
-          var dbJson = JSON.parse(data.target.responseText);
-          var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
-          document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>All Roadside Attractions</h1>" + html;
-        };
-        request.open("GET", Roadsides.API_LOC + "roadsides?_sort=name");
-        request.send();
+        Roadsides.Router.dbQuery("_sort=name", "All Roadside Attractions");
       },
       function (pageName, fail) {
         if (pageName !== "archive") {
           return fail();
         }
-        var request = new XMLHttpRequest();
-        request.onload = function (data) {
-          var dbJson = JSON.parse(data.target.responseText);
-          var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
-          document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>Archive</h1>" + html;
-        };
-        request.open("GET", Roadsides.API_LOC + "roadsides?_sort=name&archive=true");
-        request.send();
+        Roadsides.Router.dbQuery("Archive", "_sort=name&archive=true");
       },
       //static page
       function(pageName, fail) {
