@@ -38,10 +38,13 @@ addEventListener("load", function() {
       html += "</table>";
       return html;
     },
-    dbQuery: function (query, title) {
+    dbQuery: function (query, title, reverse) {
       var request = new XMLHttpRequest();
       request.onload = function (data) {
         var dbJson = JSON.parse(data.target.responseText);
+        if (reverse) {
+          dbJson.reverse();
+        }
         var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
         document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>" + title + "</h1>" + html;
       };
@@ -94,6 +97,14 @@ addEventListener("load", function() {
           return fail();
         }
         Roadsides.Router.dbQuery("Archive", "_sort=name&archive=true");
+      },
+      function(pageName, fail) {
+        if (pageName !== "whatsnew") {
+          return fail();
+        }
+        Roadsides.Router.dbQuery("initDate_like=^[0-9]", 
+          "Most Recently Added Roadside Attractions",
+          true);
       },
       //static page
       function(pageName, fail) {
