@@ -78,12 +78,10 @@ else if (options.all) {
   //letters of alphabet
   renderList = renderList.concat("qwertyuiopasdfghjklzxcvbnm".split(""));
   //roadside names
-  console.log(request("GET", ROADSIDE_LIST).body.toString());
   JSON.parse(request("GET", ROADSIDE_LIST).body.toString())
     .forEach(function(roadside) {
       renderList.push(roadside.url.substr(1, roadside.url.length));
     });
-  console.log(renderList);
   //render every page
   renderAll(renderList);
 
@@ -98,7 +96,7 @@ else {
 var output = "An error occured. Please try again later.";
 
 function render(pageUrl, fileName, callback) {
-  console.log(pageUrl);
+  console.log("rendering: " + pageUrl);
   try {
     var horseman = new Horseman();
     horseman
