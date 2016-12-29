@@ -1,5 +1,5 @@
 var Roadsides = window.Roadsides || {};
-Roadsides.API_LOC = "roadsides-api-new-roadsides.44fs.preview.openshiftapps.com/"; //set to location of API server
+Roadsides.API_LOC = "http://roadsides-api-new-roadsides.44fs.preview.openshiftapps.com/"; //set to location of API server
 /*
 Each item in the routing table is evaluated, in order from top to bottom.
 If one succeeds, then the program stop going through the table.
@@ -75,8 +75,8 @@ addEventListener("load", function() {
         if (Roadsides.Router.provinceUrlMapping[pageName] === undefined) {
           return fail();
         }
-        Roadsides.Router.dbQuery("province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=name&archive=false",
-        "By Province - " + Roadsides.Router.provinceUrlMapping[pageName]);
+        Roadsides.Router.dbQuery("province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=city&archive=false",
+          Roadsides.Router.provinceUrlMapping[pageName]);
       },
       //alphabetical page
       function (pageName, fail) {
