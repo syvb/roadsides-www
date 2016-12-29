@@ -88,31 +88,31 @@
       </select>
       <br />
       <li><a href="#/archive">Archive</a></li>
-      <li><a href="#/type">By Type</a></li>
       <li><a href="#/whatsnew">What's New</a></li>
-      <li><a href="#/wanted">Wanted Photos</a></li>
       <li><a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a></li>
-      <li><a href="#/random">Random</a></li>
+      <!--<li><a href="#/random">Random</a></li>-->
       <br />
-      <li><a href="#/pop">Planes On Pedestals</a></li>
+      <li><a href="http://roadsideattractions.ca/pop">Planes On Pedestals</a></li>
     </ul>
   </div>
   <!--roadside template-->
   <script id="roadside-template" type="text/x-handlebars-template">
-    <h2>{{name}}</h2> <br />
+    <h3>{{name}}</h3> <br />
     <img src="http://smittyvb.github.io/roadsides{{url}}.jpg" alt="{{name}}" class="roadsideImage" />
     <div id="about">
-      <br /> {{#if description}} {{description}}
-      <br /><br /> {{/if}}{{city}}, {{province}}<br /><br />
+      <br /> {{city}}, {{province}}<br /><br />
       {{#if location}}
-        {{location}}<br /><br />
+        {{{location}}}<br /><br />
       {{/if}}
       {{#if gps}}
-        - <a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>
+        <!--<a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>-->
+        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a> page
       {{else}}
-        <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">See Map Of Roadside Attractions</a>
-        {{/if}}<br /><br />
-      {{#if credit}}Credit: {{{credit}}}{{/if}}
+        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a> page
+      {{/if}}<br /><br />
+      {{#if credit}}Credit: {{{credit}}} <br /><br /> {{/if}}
+      {{#if description}} {{{description}}}
+      {{/if}}
     </div>
   </script>
   <article id="mainContent" class="text-center">

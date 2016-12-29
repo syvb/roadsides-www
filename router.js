@@ -1,5 +1,5 @@
 var Roadsides = window.Roadsides || {};
-Roadsides.API_LOC = "https://new-roadside-stuff-smittyvb.c9users.io:8081/"; //set to location of API server
+Roadsides.API_LOC = "http://roadsides-api-new-roadsides.44fs.preview.openshiftapps.com/"; //set to location of API server
 /*
 Each item in the routing table is evaluated, in order from top to bottom.
 If one succeeds, then the program stop going through the table.
@@ -75,7 +75,7 @@ addEventListener("load", function() {
         if (Roadsides.Router.provinceUrlMapping[pageName] === undefined) {
           return fail();
         }
-        Roadsides.Router.dbQuery("province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=name",
+        Roadsides.Router.dbQuery("province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=name&archive=false",
         "By Province - " + Roadsides.Router.provinceUrlMapping[pageName]);
       },
       //alphabetical page
@@ -83,20 +83,20 @@ addEventListener("load", function() {
         if (pageName.length !== 1) {
           return fail();
         }
-        Roadsides.Router.dbQuery("name_like=^" + pageName + "&_sort=name", 
+        Roadsides.Router.dbQuery("name_like=^" + pageName + "&_sort=name&archive=false", 
         "Alphabetical - " + pageName);
       },
       function (pageName, fail) {
         if (pageName !== "all") {
           return fail();
         }
-        Roadsides.Router.dbQuery("_sort=name", "All Roadside Attractions");
+        Roadsides.Router.dbQuery("_sort=name&archive=false", "All Roadside Attractions");
       },
       function (pageName, fail) {
         if (pageName !== "archive") {
           return fail();
         }
-        Roadsides.Router.dbQuery("Archive", "_sort=name&archive=true");
+        Roadsides.Router.dbQuery("_sort=name&archive=true", "Archive");
       },
       function(pageName, fail) {
         if (pageName !== "whatsnew") {
@@ -135,6 +135,7 @@ addEventListener("load", function() {
       }, 0);
     },
     loadPage: function(pageName) {
+      document.getElementById("mainContent").class = "text-center";
       pageName = pageName.replace(/[^a-zA-Z0-9]/g, "");
       doneFuncCalled = false;
       var currRouteFunc = 0;

@@ -68,8 +68,11 @@ input.gsc-input,
   padding-top: 0.1em;
 }
 
-#mainContent > h1 {
+h3 {
   padding-left: 1em;
+  text-align: center;
+  left: -113px;
+  position: relative;
 }
 
 .roadsideList td {
@@ -91,8 +94,4 @@ input.gsc-input,
   width: 300px;
   text-align:center; 
   vertical-align:middle;
-}
-
-h2 {
-  text-decoration: underline;
 }
