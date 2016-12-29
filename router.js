@@ -32,7 +32,7 @@ addEventListener("load", function() {
         html += '<tr>';
         html += '<td class="listImage"><img src="http://smittyvb.github.io/roadsides' + roadside.url + '.jpg" height="100" /></td>';
         //html += '<td>&nbsp;&nbsp;&nbsp;</td>'
-        html += '<td class="listTitle"><a href="#'  + roadside.url + '">' + roadside.name + ' <br /> ' + roadside.city + ', ' + roadside.province + '</a></td>';
+        html += '<td class="listTitle"><a href="#'  + roadside.url + '"><span style="font-weight: 900;">' + roadside.name + '</span> <br /> ' + roadside.city + ', ' + roadside.province + '</a></td>';
         html += '</tr>';
       });
       html += "</table>";

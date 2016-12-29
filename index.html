@@ -97,6 +97,9 @@
   </div>
   <!--roadside template-->
   <script id="roadside-template" type="text/x-handlebars-template">
+    {{#if archive}}
+      <span class="archive">This roadside attraction no longer exists. Below is a record of what it used to look like.</span>
+    {{/if}}
     <h3>{{name}}</h3> <br />
     <img src="http://smittyvb.github.io/roadsides{{url}}.jpg" alt="{{name}}" class="roadsideImage" />
     <div id="about">
@@ -105,14 +108,12 @@
         {{{location}}}<br /><br />
       {{/if}}
       {{#if gps}}
-        <!--<a href="https://www.google.ca/maps/@{{gps}},16z">Google Maps</a>-->
-        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a> page
+        <a href="https://www.google.ca/maps/place/{{gps}}">Google Maps</a>
       {{else}}
-        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a> page
+        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a> page.
       {{/if}}<br /><br />
-      {{#if credit}}Credit: {{{credit}}} <br /><br /> {{/if}}
-      {{#if description}} {{{description}}}
-      {{/if}}
+      {{#if description}} {{{description}}} <br /><br />{{/if}}
+      {{#if credit}}Credit: {{{credit}}}{{/if}}
     </div>
   </script>
   <article id="mainContent" class="text-center">
@@ -129,7 +130,7 @@
         <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
         <a class="a2a_button_twitter"></a>
         <a class="a2a_button_facebook"></a>
-        <a class="a2a_button_pinterest"></a>
+        <a class="a2a_button_google_plus"></a>
         <a class="a2a_button_email"></a>
       </div>
       <script async src="https://static.addtoany.com/menu/page.js"></script>
