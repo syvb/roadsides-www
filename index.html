@@ -64,7 +64,7 @@
     <ul>
       <li>By Province</li>
       <select class="dropdownlinks">
-      <option value="none">Select A Province...</option>
+      <option value="none">Select A Province Or Territory...</option>
       <option value="alberta">Alberta</option>
       <option value="bc">British Columbia</option>
       <option value="manitoba">Manitoba</option>
@@ -113,7 +113,8 @@
         Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a> page.
       {{/if}}<br /><br />
       {{#if description}} {{{description}}} <br /><br />{{/if}}
-      {{#if credit}}Credit: {{{credit}}}{{/if}}
+      {{#if credit}}Credit: {{{credit}}}<br /><br />{{/if}}
+      {{#if initDate}}Date added to site: {{initDate}}<br /><br />{{/if}}
     </div>
   </script>
   <article id="mainContent" class="text-center">
