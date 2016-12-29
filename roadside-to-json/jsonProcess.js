@@ -22,7 +22,11 @@ initJson.forEach(function(roadside) {
   roadside.url = roadside.url.replace("http://roadsideattractions.ca", "").replace(".html", "");
   roadside.name = cap(roadside.name);
   roadside.city = cap(roadside.city);
-  roadside.province = cap(roadside.province);
+  if (roadside.province === "newfoundland and labrador") {
+    roadside.province = "Newfoundland and Labrador";
+  } else {
+    roadside.province = cap(roadside.province);
+  }
   
   outJson.push(roadside);
 });
