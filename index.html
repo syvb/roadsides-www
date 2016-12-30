@@ -60,7 +60,7 @@
       </div>
     </nav>
   </header>
-  <div class="col-sm-3 col-md-2 sidebar">
+  <div class="col-sm-3 col-md-2 sidebar" style="height: 100vh;">
     <ul>
       <li>By Province<br />or Territory...</li>
       <select class="dropdownlinks">
@@ -95,6 +95,7 @@
       <li><a href="http://roadsideattractions.ca/pop">Planes On Pedestals</a></li>
     </ul>
   </div>
+  <div class="col-sm-3 col-md-2 sidebar pull-right" style="height: 100vh;"></div>
   <!--roadside template-->
   <script id="roadside-template" type="text/x-handlebars-template">
     {{#if archive}}
@@ -108,10 +109,12 @@
         {{{location}}}<br /><br />
       {{/if}}
       {{#if gps}}
-        <a href="https://www.google.ca/maps/place/{{gps}}">Google Maps</a>
+        <a href="https://www.google.ca/maps/place/{{gps}}">Google Maps</a><br /><br />
+      {{else if archive}}
+        <!-- no gps -- archived -->
       {{else}}
-        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a> page.
-      {{/if}}<br /><br />
+        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a> page.<br /><br />
+      {{/if}}
       {{#if description}} {{{description}}} <br /><br />{{/if}}
       {{#if credit}}Credit: {{{credit}}}<br /><br />{{/if}}
       {{#if initDate}}Date added to site: {{initDate}}<br /><br />{{/if}}
