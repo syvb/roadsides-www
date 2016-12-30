@@ -26,26 +26,32 @@ addEventListener("load", function() {
       "sask": "Saskatchewan",
       "yukon": "Yukon"
     },
-    htmlFromRoadsideArray: function (array) {
+    htmlFromRoadsideArray: function (array, showInitDate, limit) {
+      if (limit === undefined) {
+        limit = Infinity;
+      }
       var html = "<table class ='roadsideList'>";
-      array.forEach(function (roadside) {
+      array.forEach(function (roadside, index) {
+        if (index >= limit) {
+          return;
+        }
         html += '<tr>';
-        html += '<td class="listImage"><img src="http://smittyvb.github.io/roadsides' + roadside.url + '.jpg" height="100" /></td>';
+        html += '<td class="listImage"><a href="#'  + roadside.url + '"><img src="http://smittyvb.github.io/roadsides' + roadside.url + '.jpg" height="100" /></a></td>';
         //html += '<td>&nbsp;&nbsp;&nbsp;</td>'
-        html += '<td class="listTitle"><a href="#'  + roadside.url + '"><span style="font-weight: 900;">' + roadside.name + '</span> <br /> ' + roadside.city + ', ' + roadside.province + '</a></td>';
+        html += '<td class="listTitle"><a href="#'  + roadside.url + '"><span style="font-weight: 900;">' + roadside.name + '</span> <br /> ' + roadside.city + ', ' + roadside.province + '</a>' + (showInitDate === true ? "<br />Date Added To Site: " + roadside.initDate.split(".")[0] : "") + '</td>';
         html += '</tr>';
       });
       html += "</table>";
       return html;
     },
-    dbQuery: function (query, title, reverse) {
+    dbQuery: function (query, title, whatsNew, limit) {
       var request = new XMLHttpRequest();
       request.onload = function (data) {
         var dbJson = JSON.parse(data.target.responseText);
-        if (reverse) {
+        if (whatsNew) {
           dbJson.reverse();
         }
-        var html = Roadsides.Router.htmlFromRoadsideArray(dbJson);
+        var html = Roadsides.Router.htmlFromRoadsideArray(dbJson, whatsNew, limit);
         document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>" + title + "</h1>" + html;
       };
       request.open("GET", Roadsides.API_LOC + "roadsides?" + query);
@@ -60,6 +66,9 @@ addEventListener("load", function() {
             return fail();
           }
           var roadsideData = JSON.parse(dbData.target.responseText)[0];
+          if (roadsideData.initDate) {
+            roadsideData.initDate = roadsideData.initDate.split(".")[0];
+          }
           console.log(roadsideData);
           var html = Roadsides.ROADSIDE_TEMPLATE(roadsideData);
           document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
@@ -104,7 +113,7 @@ addEventListener("load", function() {
         }
         Roadsides.Router.dbQuery("initDate_like=^[0-9]", 
           "Most Recently Added Roadside Attractions",
-          true);
+          true, 20);
       },
       //static page
       function(pageName, fail) {

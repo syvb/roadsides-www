@@ -41,6 +41,7 @@
             <li id="founder"><a href="#/founder">Our Founder</a></li>
             <li id="contact"><a href="#/contact">Contact Us</a></li>
             <li id="blog"><a href="http://blog.roadsideattractions.ca/">Blog</a></li>
+            <li id="media"><a href="#/media">Media</a></li>
             <li id="googlecse">
               <script>
                 (function() {
@@ -62,7 +63,7 @@
   </header>
   <div class="col-sm-3 col-md-2 sidebar" style="height: 100vh;">
     <ul>
-      <li>By Province<br />or Territory...</li>
+      <li>By Province<br />or Territory</li>
       <select class="dropdownlinks">
       <option value="none">Province/Territory...</option>
       <option value="alberta">Alberta</option>
@@ -95,11 +96,13 @@
       <li><a href="http://roadsideattractions.ca/pop">Planes On Pedestals</a></li>
     </ul>
   </div>
-  <div class="col-sm-3 col-md-2 sidebar pull-right" style="height: 100vh;"></div>
+  <div class="col-sm-3 col-md-2 sidebar pull-right" style="height: 100vh;">
+    
+  </div>
   <!--roadside template-->
   <script id="roadside-template" type="text/x-handlebars-template">
     {{#if archive}}
-      <span class="archive">This roadside attraction no longer exists. Below is a record of what it used to look like.</span>
+      <span class="archive"><span style="font-size: 5em; color: red;">ARCHIVED:</span><br />This roadside attraction no longer exists. Below is a record of what it used to look like.</span>
     {{/if}}
     <h3>{{name}}</h3> <br />
     <img src="http://smittyvb.github.io/roadsides{{url}}.jpg" alt="{{name}}" class="roadsideImage" />
@@ -109,7 +112,7 @@
         {{{location}}}<br /><br />
       {{/if}}
       {{#if gps}}
-        <a href="https://www.google.ca/maps/place/{{gps}}">Google Maps</a><br /><br />
+        GPS: <a href="https://www.google.ca/maps/place/{{gps}}" target="gMapsTab">{{gps}}</a><br /><br />
       {{else if archive}}
         <!-- no gps -- archived -->
       {{else}}
