@@ -71,8 +71,27 @@ addEventListener("load", function() {
           }
           console.log(roadsideData);
           var html = Roadsides.ROADSIDE_TEMPLATE(roadsideData);
-          document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
+          //social media page tags
+        document.getElementsByTagName("head")[0].innerHTML += `
+<!-- Social Tags -->
+<meta name="twitter:title" content="${roadsideData.name}">
+<meta name="twitter:image:alt" content="${roadsideData.name}">
+<meta property="og:title" content="${roadsideData.name}">
+<meta name="twitter:url" content="${location.href}">
+<meta property="og:url" content="${location.href}">
+<meta name="twitter:image:src" content="${"http://smittyvb.github.io/roadsides" + roadsideData.url + ".jpg"}">
+<meta property="og:image" content="${"http://smittyvb.github.io/roadsides" + roadsideData.url + ".jpg"}">
+<meta name="twitter:description" content="Large Canadian Roadside Attractions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Roadside_Canada">
+<meta name="twitter:creator" content="@Roadside_Canada">
+<meta name="twitter:domain" content="roadsideattractions.ca">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Large Canadian Roadside Attractions">
+<meta property="og:locale" content="en_US">
+        `;
           document.getElementById("mainContent").className = "roadside text-center";
+          document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
           Roadsides.Router.highlightActive();
         });
         dbRequest.open("GET", Roadsides.API_LOC + "roadsides?url=/" + pageName);

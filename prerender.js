@@ -33,18 +33,19 @@ else if (options.all) {
 
 
   //copy data files from root, to prerendered directory
-  var roadsideTmpFilePath = "/tmp/roadsideData";
-  fse.removeSync("prerendered");
-  fse.removeSync(roadsideTmpFilePath);
-  fse.copySync(process.cwd(), roadsideTmpFilePath);
-  fse.copySync(roadsideTmpFilePath, "prerendered");
-  fse.removeSync("prerendered/.git");
-  fse.removeSync("prerendered/.c9");
-  fse.removeSync("prerendered/node_modules");
-  fse.removeSync("prerendered/roadside-to-json");
-  fse.removeSync("prerendered/images");
-  fse.removeSync("prerendered/.gitignore");
-
+  if (options.index === undefined) {
+    var roadsideTmpFilePath = "/tmp/roadsideData";
+    fse.removeSync("prerendered");
+    fse.removeSync(roadsideTmpFilePath);
+    fse.copySync(process.cwd(), roadsideTmpFilePath);
+    fse.copySync(roadsideTmpFilePath, "prerendered");
+    fse.removeSync("prerendered/.git");
+    fse.removeSync("prerendered/.c9");
+    fse.removeSync("prerendered/node_modules");
+    fse.removeSync("prerendered/roadside-to-json");
+    fse.removeSync("prerendered/images");
+    fse.removeSync("prerendered/.gitignore");
+  }
   //delete index.html, and replace it with #/main
   fse.removeSync("prerendered/index.html");
   render(BASE_URL + "main", "index");
@@ -132,7 +133,7 @@ function render(pageUrl, fileName, callback) {
 
 function renderAll(toRender, index) {
   if (index === undefined) {
-    index = options.index ? options.index : 0;
+    index = options.index ? options.index + 40 : 0; //40 is about the number of static pages
   }
   if (index === toRender.length) {
     return;
@@ -143,7 +144,7 @@ function renderAll(toRender, index) {
     });
   };
   if ((index % 15) === 0) {
-    setTimeout(renderCurr, 5000);
+    setTimeout(renderCurr, 15000);
   } else {
     renderCurr();
   }

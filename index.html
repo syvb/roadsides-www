@@ -79,13 +79,15 @@
       <option value="sask">Saskatchewan</option>
       <option value="yukon">Yukon</option>
       </select>
-      <br /><br />
+      <br /><br /><br />
       <select class="dropdownlinks">
         <option value="none">A, B, C...</option>
         <option value="alphabet">All Roadsides</option>
         <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option><option value="M">M</option><option value="N">N</option><option value="O">O</option><option value="P">P</option><option value="Q">Q</option><option value="R">R</option><option value="S">S</option><option value="T">T</option><option value="U">U</option><option value="V">V</option><option value="W">W</option><option value="X">X</option><option value="Y">Y</option><option value="Z">Z</option>
       </select>
+      <br /><br />
       <li><a href="#/whatsnew">What's New</a></li>
+      <br />
       <li><a href="#/archive">Archive</a></li>
       <br />
       <li><a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a></li>
@@ -94,7 +96,7 @@
       <li><a href="http://roadsideattractions.ca/pop">Planes On Pedestals</a></li>
     </ul>
   </div>
-  <div class="sidebar pull-right" style="height: 100vh;width: 14%;">
+  <div class="sidebar pull-right" style="height: 100vh;width: 19%;">
     
   </div>
   <!--roadside template-->
@@ -105,9 +107,9 @@
     <h3>{{name}}</h3> <br />
     <img src="http://smittyvb.github.io/roadsides{{url}}.jpg" alt="{{name}}" class="roadsideImage" />
     <div id="about">
-      <br /> {{city}}, {{province}}<br /><br />
+      <br /> <span class="location">{{city}}, {{province}}</span><br /><br />
       {{#if location}}
-        <span class="location">{{{location}}}</span><br /><br />
+        {{{location}}}<br /><br />
       {{/if}}
       {{#if gps}}
         GPS: <a href="https://www.google.ca/maps/place/{{gps}}" target="gMapsTab">{{gps}}</a><br /><br />
@@ -117,8 +119,7 @@
         Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing" target="allRoadsideMap">Google Maps</a> page.<br /><br />
       {{/if}}
       {{#if description}} {{{description}}} <br /><br />{{/if}}
-      {{#if credit}}<span class="credit">Credit: {{{credit}}}</span><br /><br />{{/if}}
-      {{#if initDate}}Date added to site: {{initDate}}<br /><br />{{/if}}
+      {{#if credit}}<span class="credit">Credit: {{{credit}}}{{#if initDate}}&nbsp;&nbsp;&nbsp;({{initDate}}){{/if}}</span>{{/if}}
     </div>
   </script>
   <article id="mainContent" class="text-center">
