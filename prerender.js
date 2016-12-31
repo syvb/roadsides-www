@@ -8,7 +8,7 @@ var fse = require("fs-extra");
 var request = require('sync-request');
 
 const BASE_URL = "https://new-roadside-stuff-smittyvb.c9users.io:8082/#";
-const ROADSIDE_LIST = "http://roadsides-api-new-roadsides.44fs.preview.openshiftapps.com/roadsides";
+const ROADSIDE_LIST = "http://new-roadside-stuff-smittyvb.c9users.io:8081/roadsides";
 const optionDefinitions = [{
   name: 'all',
   alias: 'a',
@@ -115,7 +115,6 @@ function render(pageUrl, fileName, callback) {
         output = output[0] +
           "<script src='hashtourl.js'></script>" +
           output[1].split("<!--END-->")[1];
-        output = output.replace("#/", "/prerendered");
         fse.writeFile("prerendered/" + fileName + ".html", output, "utf-8", function(err) {
           console.log(err);
         });

@@ -1,5 +1,5 @@
 var Roadsides = window.Roadsides || {};
-Roadsides.API_LOC = "http://roadsides-api-new-roadsides.44fs.preview.openshiftapps.com/"; //set to location of API server
+Roadsides.API_LOC = "https://new-roadside-stuff-smittyvb.c9users.io:8081/"; //set to location of API server
 /*
 Each item in the routing table is evaluated, in order from top to bottom.
 If one succeeds, then the program stop going through the table.
@@ -72,24 +72,7 @@ addEventListener("load", function() {
           console.log(roadsideData);
           var html = Roadsides.ROADSIDE_TEMPLATE(roadsideData);
           //social media page tags
-        document.getElementsByTagName("head")[0].innerHTML += `
-<!-- Social Tags -->
-<meta name="twitter:title" content="${roadsideData.name}">
-<meta name="twitter:image:alt" content="${roadsideData.name}">
-<meta property="og:title" content="${roadsideData.name}">
-<meta name="twitter:url" content="${location.href}">
-<meta property="og:url" content="${location.href}">
-<meta name="twitter:image:src" content="${"http://smittyvb.github.io/roadsides" + roadsideData.url + ".jpg"}">
-<meta property="og:image" content="${"http://smittyvb.github.io/roadsides" + roadsideData.url + ".jpg"}">
-<meta name="twitter:description" content="Large Canadian Roadside Attractions">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@Roadside_Canada">
-<meta name="twitter:creator" content="@Roadside_Canada">
-<meta name="twitter:domain" content="roadsideattractions.ca">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Large Canadian Roadside Attractions">
-<meta property="og:locale" content="en_US">
-        `;
+          document.getElementsByTagName("head")[0].innerHTML += "\n<!-- Social Tags -->\n<meta name=\"twitter:title\" content=\"" + roadsideData.name + "\">\n<meta name=\"twitter:image:alt\" content=\"" + roadsideData.name + "\">\n<meta property=\"og:title\" content=\"" + roadsideData.name + "\">\n<meta name=\"twitter:url\" content=\"" + location.href + "\">\n<meta property=\"og:url\" content=\"" + location.href + "\">\n<meta name=\"twitter:image:src\" content=\"" + ("http://smittyvb.github.io/roadsides" + roadsideData.url + ".jpg") + "\">\n<meta property=\"og:image\" content=\"" + ("http://smittyvb.github.io/roadsides" + roadsideData.url + ".jpg") + "\">\n<meta name=\"twitter:description\" content=\"Large Canadian Roadside Attractions\">\n<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:site\" content=\"@Roadside_Canada\">\n<meta name=\"twitter:creator\" content=\"@Roadside_Canada\">\n<meta name=\"twitter:domain\" content=\"roadsideattractions.ca\">\n<meta property=\"og:type\" content=\"website\">\n<meta property=\"og:site_name\" content=\"Large Canadian Roadside Attractions\">\n<meta property=\"og:locale\" content=\"en_US\">\n          ";
           document.getElementById("mainContent").className = "roadside text-center";
           document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
           Roadsides.Router.highlightActive();
