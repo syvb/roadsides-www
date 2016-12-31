@@ -96,7 +96,7 @@ addEventListener("load", function() {
         "Alphabetical - " + pageName);
       },
       function (pageName, fail) {
-        if (pageName !== "all") {
+        if (pageName !== "alphabet") {
           return fail();
         }
         Roadsides.Router.dbQuery("_sort=name&archive=false", "All Roadside Attractions");

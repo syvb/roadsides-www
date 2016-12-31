@@ -57,7 +57,7 @@ else if (options.all) {
     "pics",
     "province",
     //all roadsides page
-    "all",
+    "alphabet",
     //province pages
     "alberta",
     "bc",
