@@ -20,6 +20,10 @@
   margin-top: 4em;
 }
 
+.sidebar>ul {
+  list-style: none;
+}
+
 #headerImg {
   margin-top: 1em;
   margin-left: 5em;
@@ -36,6 +40,10 @@ footer>small {
   color: lightgrey;
   opacity: 0.5;
   pointer-events: none;
+}
+
+#termsLink {
+  pointer-events: auto;
 }
 
 @media only screen and (min-device-width: 320px) and (orientation: portrait) {
@@ -104,4 +112,12 @@ h3 {
 
 h1 {
   text-align: left;
+}
+
+.location {
+  font-weight: 900;
+}
+
+.credit {
+  font-style: italic;
 }

@@ -63,7 +63,6 @@
   </header>
   <div class="col-sm-3 col-md-2 sidebar" style="height: 100vh;">
     <ul>
-      <li>By Province<br />or Territory</li>
       <select class="dropdownlinks">
       <option value="none">Province/Territory...</option>
       <option value="alberta">Alberta</option>
@@ -80,46 +79,45 @@
       <option value="sask">Saskatchewan</option>
       <option value="yukon">Yukon</option>
       </select>
-      <br />
-      <li>Alphabetical</li>
+      <br /><br />
       <select class="dropdownlinks">
         <option value="none">A, B, C...</option>
         <option value="all">All Roadsides</option>
         <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option><option value="M">M</option><option value="N">N</option><option value="O">O</option><option value="P">P</option><option value="Q">Q</option><option value="R">R</option><option value="S">S</option><option value="T">T</option><option value="U">U</option><option value="V">V</option><option value="W">W</option><option value="X">X</option><option value="Y">Y</option><option value="Z">Z</option>
       </select>
-      <br />
-      <li><a href="#/archive">Archive</a></li>
       <li><a href="#/whatsnew">What's New</a></li>
+      <li><a href="#/archive">Archive</a></li>
+      <br />
       <li><a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a></li>
       <!--<li><a href="#/random">Random</a></li>-->
       <br />
       <li><a href="http://roadsideattractions.ca/pop">Planes On Pedestals</a></li>
     </ul>
   </div>
-  <div class="col-sm-3 col-md-2 sidebar pull-right" style="height: 100vh;">
+  <div class="sidebar pull-right" style="height: 100vh;width: 14%;">
     
   </div>
   <!--roadside template-->
   <script id="roadside-template" type="text/x-handlebars-template">
     {{#if archive}}
-      <span class="archive"><span style="font-size: 5em; color: red;">ARCHIVED:</span><br />This roadside attraction no longer exists. Below is a record of what it used to look like.</span>
+      <span class="archive"><span style="color: red; text-decoration: underline;">ARCHIVED</span><br />This roadside attraction no longer exists.</span>
     {{/if}}
     <h3>{{name}}</h3> <br />
     <img src="http://smittyvb.github.io/roadsides{{url}}.jpg" alt="{{name}}" class="roadsideImage" />
     <div id="about">
       <br /> {{city}}, {{province}}<br /><br />
       {{#if location}}
-        {{{location}}}<br /><br />
+        <span class="location">{{{location}}}</span><br /><br />
       {{/if}}
       {{#if gps}}
         GPS: <a href="https://www.google.ca/maps/place/{{gps}}" target="gMapsTab">{{gps}}</a><br /><br />
       {{else if archive}}
         <!-- no gps -- archived -->
       {{else}}
-        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">Google Maps</a> page.<br /><br />
+        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing" target="allRoadsideMap">Google Maps</a> page.<br /><br />
       {{/if}}
       {{#if description}} {{{description}}} <br /><br />{{/if}}
-      {{#if credit}}Credit: {{{credit}}}<br /><br />{{/if}}
+      {{#if credit}}<span class="credit">Credit: {{{credit}}}</span><br /><br />{{/if}}
       {{#if initDate}}Date added to site: {{initDate}}<br /><br />{{/if}}
     </div>
   </script>
@@ -143,7 +141,7 @@
       <script async src="https://static.addtoany.com/menu/page.js"></script>
       <!-- AddToAny END -->
     </div>
-    <small class="footer navbar-fixed-bottom"><p>Copyright &copy; 2016 Large Canadian Roadside Attractions.</p></small>
+    <small class="footer navbar-fixed-bottom"><p>Copyright &copy; 2016 Large Canadian Roadside Attractions.</p><a href="#/terms" id="termsLink">Terms of use.</a></small>
   </footer>
   <br><br>
 </body>

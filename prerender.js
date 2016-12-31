@@ -98,7 +98,12 @@ var output = "An error occured. Please try again later.";
 function render(pageUrl, fileName, callback) {
   console.log("rendering: " + pageUrl);
   try {
-    var horseman = new Horseman();
+    var horseman = new Horseman({
+      timeout: 10000,
+      loadImages: false,
+      webSecurity: false,
+      injectJquery: false
+    });
     horseman
       .open(pageUrl)
       .waitForSelector(".loaded", 7500)
