@@ -74,7 +74,12 @@ else if (options.all) {
     "sask",
     "yukon",
     //other
-    "archive"
+    "archive",
+    "whatsnew",
+    "tch",
+    "type",
+    "tags",
+    "terms"
   ];
   //letters of alphabet
   renderList = renderList.concat("qwertyuiopasdfghjklzxcvbnm".split(""));
@@ -142,8 +147,8 @@ function renderAll(toRender, index) {
       renderAll(toRender, index + 1);
     });
   };
-  if ((index % 15) === 0) {
-    setTimeout(renderCurr, 15000);
+  if ((index % 5) === 0) {
+    setTimeout(renderCurr, 5000);
   } else {
     renderCurr();
   }

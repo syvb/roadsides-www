@@ -95,7 +95,7 @@ addEventListener("load", function() {
           return fail();
         }
         Roadsides.Router.dbQuery("name_like=^" + pageName + "&_sort=name&archive=false", 
-        "Alphabetical - " + pageName);
+        "Alphabetical - " + pageName.toUpperCase());
       },
       function (pageName, fail) {
         if (pageName !== "alphabet") {
