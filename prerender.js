@@ -79,7 +79,8 @@ else if (options.all) {
     "tch",
     "type",
     "tags",
-    "terms"
+    "terms",
+    "media"
   ];
   //letters of alphabet
   renderList = renderList.concat("qwertyuiopasdfghjklzxcvbnm".split(""));
