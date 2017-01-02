@@ -121,3 +121,11 @@ h1 {
 .credit {
   font-style: italic;
 }
+
+.credit > a {
+  border: none;
+}
+
+.fotorama__wrap {
+  margin: 0 auto;
+}

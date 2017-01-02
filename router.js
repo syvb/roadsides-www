@@ -69,12 +69,30 @@ addEventListener("load", function() {
           if (roadsideData.initDate) {
             roadsideData.initDate = roadsideData.initDate.split(".")[0];
           }
+          roadsideData.imgUrls = [
+            {imgUrl: "http://smittyvb.github.io/roadsides" + roadsideData.url + ".jpg"}
+          ];
+          var extraPics = roadsideData.photos - 1;
+          var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+          for (var i = 0; i < extraPics; i++) {
+            roadsideData.imgUrls.unshift({imgUrl: "http://smittyvb.github.io/roadsides/lcra" + roadsideData.line + alphabet[i] + ".jpg"});
+          }
+          if (extraPics === 0) {
+            roadsideData.showGallery = false;
+          } else {
+            roadsideData.showGallery = true;
+          }
           console.log(roadsideData);
           var html = Roadsides.ROADSIDE_TEMPLATE(roadsideData);
+
           //social media page tags
           document.getElementsByTagName("head")[0].innerHTML += "\n<!-- Social Tags -->\n<meta name=\"twitter:title\" content=\"" + roadsideData.name + "\">\n<meta name=\"twitter:image:alt\" content=\"" + roadsideData.name + "\">\n<meta property=\"og:title\" content=\"" + roadsideData.name + "\">\n<meta name=\"twitter:url\" content=\"" + location.href + "\">\n<meta property=\"og:url\" content=\"" + location.href + "\">\n<meta name=\"twitter:image:src\" content=\"" + ("http://smittyvb.github.io/roadsides" + roadsideData.url + ".jpg") + "\">\n<meta property=\"og:image\" content=\"" + ("http://smittyvb.github.io/roadsides" + roadsideData.url + ".jpg") + "\">\n<meta name=\"twitter:description\" content=\"Large Canadian Roadside Attractions\">\n<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:site\" content=\"@Roadside_Canada\">\n<meta name=\"twitter:creator\" content=\"@Roadside_Canada\">\n<meta name=\"twitter:domain\" content=\"roadsideattractions.ca\">\n<meta property=\"og:type\" content=\"website\">\n<meta property=\"og:site_name\" content=\"Large Canadian Roadside Attractions\">\n<meta property=\"og:locale\" content=\"en_US\">\n          ";
           document.getElementById("mainContent").className = "roadside text-center";
-          document.getElementById("mainContent").innerHTML = html + "<div class='loaded'></div>";
+          document.getElementById("mainContent").innerHTML = html;
+          document.getElementById("mainContent").innerHTML += "<div class='loaded'></div>";
+          setTimeout(function () {
+            $(".fotorama").fotorama();
+          }, 100);
           Roadsides.Router.highlightActive();
         });
         dbRequest.open("GET", Roadsides.API_LOC + "roadsides?url=/" + pageName);

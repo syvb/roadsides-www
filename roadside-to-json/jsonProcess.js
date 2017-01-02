@@ -5,6 +5,7 @@ var fs = require("fs");
 var initJson = fs.readFileSync("csvtojson.json");
 initJson = JSON.parse(initJson);
 var outJson = [];
+var curLineNum = 1;
 
 function cap(name) {
   var outName = "";
@@ -15,6 +16,7 @@ function cap(name) {
 }
 
 initJson.forEach(function(roadside) {
+  curLineNum++;
   if (((roadside.productionReady !== "yes") && PRODUCTION) || roadside.url === undefined){
     return;
   }
@@ -27,6 +29,7 @@ initJson.forEach(function(roadside) {
   } else {
     roadside.province = cap(roadside.province);
   }
+  roadside.line = curLineNum;
   
   outJson.push(roadside);
 });

@@ -3,15 +3,19 @@
 
 <head>
   <title>Roadside Attractions</title>
+  <!--jQuery-->
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-  <!-- Latest compiled and minified CSS -->
+  
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-  <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-  <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  
+  <!--Fotorama-->
+  <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+  
+  
   <link rel="stylesheet" href="css/main.css" />
   <script src="polyfills.js"></script>
   <!--NO-PRERENDER-->
@@ -107,7 +111,16 @@
       <span class="archive"><span style="color: red; text-decoration: underline;">ARCHIVED</span><br />This roadside attraction no longer exists.</span>
     {{/if}}
     <h3>{{name}}</h3> <br />
-    <img src="http://smittyvb.github.io/roadsides{{url}}.jpg" alt="{{name}}" class="roadsideImage" />
+    {{#if showGallery}}
+    <div class="fotorama" data-height="55%"
+      data-allowfullscreen="true">
+      {{#each imgUrls}}
+        <img src="{{imgUrl}}" data-fit="contain"/>
+      {{/each}}
+    </div>
+    {{else}}
+    <img src="http://smittyvb.github.io/roadsides/{{url}}.jpg" style="width: 30%" />
+    {{/if}}
     <div id="about">
       <br /> <span class="location">{{city}}, {{province}}</span><br /><br />
       {{#if location}}
@@ -121,7 +134,6 @@
         Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing" target="allRoadsideMap">Google Maps</a> page.<br /><br />
       {{/if}}
       {{#if description}} {{{description}}} <br /><br />{{/if}}
-      {{#if credit}}<span class="credit">Credit: {{{credit}}}{{#if initDate}}&nbsp;&nbsp;&nbsp;({{initDate}}){{/if}}</span>{{/if}}
     </div>
   </script>
   <article id="mainContent" class="text-center">
