@@ -82,6 +82,13 @@ addEventListener("load", function() {
           } else {
             roadsideData.showGallery = true;
           }
+          alert(roadsideData.gps);
+          if (roadsideData.gps === "na") {
+            roadsideData.noGps = true;
+            roadsideData.gps = "";
+          } else {
+            roadsideData.noGps = false;
+          }
           console.log(roadsideData);
           var html = Roadsides.ROADSIDE_TEMPLATE(roadsideData);
 
