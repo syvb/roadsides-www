@@ -108,6 +108,7 @@ var disqus_url = "roadsideattractions.ca/prerendered" + roadsideData.url;
 var disqus_config = function () {
 this.page.url = "roadsideattractions.ca/prerendered" + roadsideData.url;  // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier = roadsideData.url; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+this.page.title = roadsideData.name;
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -223,4 +224,5 @@ s.setAttribute('data-timestamp', +new Date());
   else {
     window.onpopstate = Roadsides.Router.update;
   }
+  Roadsides.Router.update();
 });
