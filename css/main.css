@@ -129,3 +129,7 @@ h1 {
 .fotorama__wrap {
   margin: 0 auto;
 }
+
+body {
+  font-family: Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

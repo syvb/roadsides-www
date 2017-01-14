@@ -1,10 +1,14 @@
-addEventListener("hashchange", function () {
+var fixHash = function () {
   if ((location.hash === "#main") || (location.hash === "#/main")) {
     location.pathname = "http://roadsideattractions.ca/";
   }
   location.pathname = "/prerendered" + 
     location.hash.substr(1, location.hash.length).toLowerCase();
-});
+};
+
+addEventListener("hashchange", fixHash);
+addEventListener("load", fixHash);
+
 
 var disqus_url = "http://roadsideattractions.ca/prerendered" + location.pathname.split("/prerendered")[1];
 

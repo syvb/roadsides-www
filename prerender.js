@@ -32,22 +32,22 @@ else if (options.all) {
   //render entire site
 
 
-  //copy data files from root, to prerendered directory
+  //copy data files from root, to roadside directory
   if (options.index === undefined) {
     var roadsideTmpFilePath = "/tmp/roadsideData";
-    fse.removeSync("prerendered");
+    fse.removeSync("roadside");
     fse.removeSync(roadsideTmpFilePath);
     fse.copySync(process.cwd(), roadsideTmpFilePath);
-    fse.copySync(roadsideTmpFilePath, "prerendered");
-    fse.removeSync("prerendered/.git");
-    fse.removeSync("prerendered/.c9");
-    fse.removeSync("prerendered/node_modules");
-    fse.removeSync("prerendered/roadside-to-json");
-    fse.removeSync("prerendered/images");
-    fse.removeSync("prerendered/.gitignore");
+    fse.copySync(roadsideTmpFilePath, "roadside");
+    fse.removeSync("roadside/.git");
+    fse.removeSync("roadside/.c9");
+    fse.removeSync("roadside/node_modules");
+    fse.removeSync("roadside/roadside-to-json");
+    fse.removeSync("roadside/images");
+    fse.removeSync("roadside/.gitignore");
   }
   //delete index.html, and replace it with #/main
-  fse.removeSync("prerendered/index.html");
+  fse.removeSync("roadside/index.html");
   render(BASE_URL + "main", "index");
 
   //get list of all pages in site
@@ -121,7 +121,7 @@ function render(pageUrl, fileName, callback) {
         output = output[0] +
           "<script src='hashtourl.js'></script>" +
           output[1].split("<!--END-->")[1];
-        fse.writeFile("prerendered/" + fileName + ".html", output, "utf-8", function(err) {
+        fse.writeFile("roadside/" + fileName + ".html", output, "utf-8", function(err) {
           console.log(err);
         });
         horseman.close();
