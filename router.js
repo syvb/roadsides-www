@@ -226,3 +226,6 @@ s.setAttribute('data-timestamp', +new Date());
   }
   Roadsides.Router.update();
 });
+addEventListener("load", function() {
+  Roadsides.Router.update();
+});

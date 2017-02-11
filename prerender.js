@@ -121,6 +121,7 @@ function render(pageUrl, fileName, callback) {
         output = output[0] +
           "<script src='hashtourl.js'></script>" +
           output[1].split("<!--END-->")[1];
+        output = "<!doctype html><html>" + output + "</html>";
         fse.writeFile("roadside/" + fileName + ".html", output, "utf-8", function(err) {
           console.log(err);
         });
