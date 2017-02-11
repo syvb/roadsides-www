@@ -10,7 +10,7 @@ function addRoadside(url) {
   xml += `<url>
     <loc>http://roadsideattractions.ca/roadside` + url + `</loc>
     <priority>0.5</priority>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
   </url>
   `;
 }
