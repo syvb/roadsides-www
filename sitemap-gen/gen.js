@@ -25,7 +25,7 @@ http.get("http://new-roadside-stuff-smittyvb.c9users.io:8081/roadsides", functio
       parsedData.forEach(function(roadside) {
         addRoadside(roadside.url);
       });
-      xml += "</urlset>"
+      xml += "</urlset>";
       fs.writeFile("roadsides.xml", xml, "utf-8", function(err) {
         console.log(err);
       });

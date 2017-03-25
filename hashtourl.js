@@ -2,8 +2,11 @@ var fixHash = function () {
   if ((location.hash === "#main") || (location.hash === "#/main")) {
     location.pathname = "http://roadsideattractions.ca/";
   }
-  location.pathname = "/roadside" + 
+  if (location.hash !== "") {
+    location.pathname = "/roadside" + 
     location.hash.substr(1, location.hash.length).toLowerCase();
+  }
+
 };
 
 addEventListener("hashchange", fixHash);

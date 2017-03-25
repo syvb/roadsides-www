@@ -116,7 +116,7 @@ function render(pageUrl, fileName, callback) {
       .waitForSelector(".loaded", 7500)
       .html("html").then(function(html) {
         console.log("loaded: " + pageUrl);
-        output = html;
+        output = html.replace(new RegExp('"#/', "g"), '"/roadside/');
         output = output.split("<!--NO-PRERENDER-->");
         output = output[0] +
           "<script src='hashtourl.js'></script>" +

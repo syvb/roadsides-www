@@ -96,6 +96,8 @@ addEventListener("load", function() {
           document.getElementById("mainContent").className = "roadside text-center";
           document.getElementById("mainContent").innerHTML = html;
           document.getElementById("mainContent").innerHTML += "<div class='loaded'></div>";
+          
+          document.title = roadsideData.name;
           setTimeout(function () {
             $(".fotorama").fotorama();
             
