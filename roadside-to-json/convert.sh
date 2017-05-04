@@ -7,3 +7,7 @@ echo "Turning into JSON"
 csvtojson parse io/roadsides.csv --workerNum=2 --ignoreEmpty=true --trim=true > csvtojson.json
 echo "Processing file..."
 node jsonProcess.js
+echo "Copying to server..."
+cp io/processed.json ../../temp-api/roadsides.json
+echo "Done!"
+echo "Restart the backend server, now."
