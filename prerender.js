@@ -23,6 +23,12 @@ const optionDefinitions = [{
 }, {
   name: 'index',
   type: Number
+}, {
+  name: 'staticonly',
+  type: Boolean
+}, {
+  name: 'nodelete',
+  type: Boolean
 }];
 const options = commandLineArgs(optionDefinitions);
 if (options.file !== undefined) {
@@ -33,7 +39,7 @@ else if (options.all) {
 
 
   //copy data files from root, to roadside directory
-  if (options.index === undefined) {
+  if ((options.index === undefined) || (options.nodelete)) {
     var roadsideTmpFilePath = "/tmp/roadsideData";
     fse.removeSync("roadside");
     fse.removeSync(roadsideTmpFilePath);
@@ -85,10 +91,12 @@ else if (options.all) {
   //letters of alphabet
   renderList = renderList.concat("qwertyuiopasdfghjklzxcvbnm".split(""));
   //roadside names
-  JSON.parse(request("GET", ROADSIDE_LIST).body.toString())
-    .forEach(function(roadside) {
-      renderList.push(roadside.url.substr(1, roadside.url.length));
-    });
+  if (!options.staticonly) {
+    JSON.parse(request("GET", ROADSIDE_LIST).body.toString())
+      .forEach(function(roadside) {
+        renderList.push(roadside.url.substr(1, roadside.url.length));
+      });
+  }
   //render every page
   renderAll(renderList);
 
@@ -150,7 +158,7 @@ function renderAll(toRender, index) {
     });
   };
   if ((index % 5) === 0) {
-    setTimeout(renderCurr, 5000);
+    setTimeout(renderCurr, 4500);
   } else {
     renderCurr();
   }
