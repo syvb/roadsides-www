@@ -139,20 +139,20 @@ s.setAttribute('data-timestamp', +new Date());
         if (pageName.length !== 1) {
           return fail();
         }
-        Roadsides.Router.dbQuery("name_like=^" + pageName + "&_sort=name&archive=false", 
+        Roadsides.Router.dbQuery("sortName_like=^" + pageName + "&_sort=sortName&archive=false", 
         "Alphabetical - " + pageName.toUpperCase());
       },
       function (pageName, fail) {
         if (pageName !== "alphabet") {
           return fail();
         }
-        Roadsides.Router.dbQuery("_sort=name&archive=false", "All Roadside Attractions");
+        Roadsides.Router.dbQuery("_sort=sortName&archive=false", "All Roadside Attractions");
       },
       function (pageName, fail) {
         if (pageName !== "archive") {
           return fail();
         }
-        Roadsides.Router.dbQuery("_sort=name&archive=true", "Archive");
+        Roadsides.Router.dbQuery("_sort=sortName&archive=true", "Archive");
       },
       function(pageName, fail) {
         if (pageName !== "whatsnew") {
