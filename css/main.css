@@ -133,3 +133,34 @@ h1 {
 body {
   font-family: Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+
+@media print {
+  #disqus_thread {
+    display: none;
+  }
+  .sidebar {
+    display: none;
+  }
+  header {
+    display: none;
+  }
+  #termsLink {
+    display: none;
+  }
+  a[href]:after {
+    content: none !important;
+  }
+  body {
+    transform: scale(1.15);
+    position: relative;
+    top: 4.1em;
+    font-size: 2em;
+  }
+  footer {
+    margin: 3em;
+  }
+  h3 {
+    font-size: 2em;
+  }
+}

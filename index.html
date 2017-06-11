@@ -65,6 +65,7 @@
             <li id="contact"><a href="#/contact">Contact Us</a></li>
             <li id="blog"><a href="http://blog.roadsideattractions.ca/">Blog</a></li>
             <li id="media"><a href="#/media">Media</a></li>
+            <li id="extras"><a href="#/extras">Extras</a></li>
             <!--
             <li id="googlecse">
               <script>
@@ -146,13 +147,13 @@
         {{{location}}}<br /><br />
       {{/if}}
       {{#if gps}}
-        GPS: <a href="https://www.google.ca/maps/place/{{gps}}" target="gMapsTab">{{gps}}</a><br /><br />
+        GPS: <a href="https://www.google.ca/maps/place/{{gps}}" target="gMapsTab" class="gMaps">{{gps}}</a><br /><br />
       {{else if archive}}
         <!-- no gps -- archived -->
       {{else if noGps}}
         <!-- spreadsheet says no gps -->
       {{else}}
-        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing" target="allRoadsideMap">Google Maps</a> page.<br /><br />
+        Search for this roadside attraction on our <a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing" target="allRoadsideMap" class="gMaps">Google Maps</a> page.<br /><br />
       {{/if}}
       {{#if description}} {{{description}}} <br /><br />{{/if}}
       {{#if credit}}<span class="credit">Credit: {{{credit}}}{{#if initDate}}&nbsp;&nbsp;&nbsp;({{initDate}}){{/if}}</span>{{/if}}
