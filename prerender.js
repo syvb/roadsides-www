@@ -7,7 +7,7 @@ var Horseman = require('node-horseman');
 var fse = require("fs-extra");
 var request = require('sync-request');
 
-const BASE_URL = "https://new-roadside-stuff-smittyvb.c9users.io:8082/#";
+const BASE_URL = "http://new-roadside-stuff-smittyvb.c9users.io:8082/#";
 const ROADSIDE_LIST = "http://new-roadside-stuff-smittyvb.c9users.io:8081/roadsides";
 const optionDefinitions = [{
   name: 'all',
@@ -86,7 +86,8 @@ else if (options.all) {
     "type",
     "tags",
     "terms",
-    "media"
+    "media",
+    "extras"
   ];
   //letters of alphabet
   renderList = renderList.concat("qwertyuiopasdfghjklzxcvbnm".split(""));
@@ -120,6 +121,11 @@ function render(pageUrl, fileName, callback) {
       injectJquery: false
     });
     horseman
+      .cookies([{
+        name: 'c9.live.user.click-through',
+        value: 'ok',
+        domain: '.c9users.io'
+      }])
       .open(pageUrl)
       .waitForSelector(".loaded", 7500)
       .html("html").then(function(html) {
