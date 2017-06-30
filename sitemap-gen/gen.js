@@ -6,10 +6,10 @@ xml +=
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
-function addRoadside(url) {
+function addRoadside(url, archived) {
   xml += `<url>
     <loc>http://roadsideattractions.ca/roadside` + url + `</loc>
-    <priority>0.5</priority>
+    <priority>` + (archived ? "0.4" : "0.8") + `</priority>
     <changefreq>monthly</changefreq>
   </url>
   `;
@@ -23,7 +23,7 @@ http.get("http://new-roadside-stuff-smittyvb.c9users.io:8081/roadsides", functio
     try {
       var parsedData = JSON.parse(rawData);
       parsedData.forEach(function(roadside) {
-        addRoadside(roadside.url);
+        addRoadside(roadside.url, roadside.archive);
       });
       xml += "</urlset>";
       fs.writeFile("roadsides.xml", xml, "utf-8", function(err) {
