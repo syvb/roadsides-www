@@ -87,7 +87,8 @@ else if (options.all) {
     "tags",
     "terms",
     "media",
-    "extras"
+    "extras",
+    //"submit"
   ];
   //letters of alphabet
   renderList = renderList.concat("qwertyuiopasdfghjklzxcvbnm".split(""));
@@ -121,6 +122,9 @@ function render(pageUrl, fileName, callback) {
       injectJquery: false
     });
     horseman
+      .at("resourceError", function (e) {
+        console.error("ERROR: " + e);
+      })
       .cookies([{
         name: 'c9.live.user.click-through',
         value: 'ok',

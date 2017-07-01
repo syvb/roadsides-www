@@ -1,0 +1,39 @@
+<h1>Submit a roadside attraction</h1><br>
+    <form action='https://submit.roadsideattractions.ca' name='submit-roadside' method='post' enctype='multipart/form-data'><input type='hidden' name='form-name' value='submit-roadside' />
+      <table>
+        <tr>
+          <td>
+            <p>
+              <label>Your name:</label><br>
+              <input type="text" name="submitter-name" required style="width: 15em;">
+            </p>
+            <p>
+          </td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td>
+            <p>
+              <label>Your email:</label><br>
+              <input type="email" name="email" required style="width: 15em;">
+            </p>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <p>
+        <label>Location of roadside attraction:<br>[City, street address or intersection, GPS coordinates if known.]</label><br>
+        <textarea name="location" required style="width: 35%;height: 3em;"></textarea>
+      </p><br>
+      <p>
+        <label>Other information:<br>
+        [Name of roadside attraction, description, creator, date of installation — any information]</label><br>
+        <textarea name="other-info" style="width: 35%;height: 4em;"></textarea>
+      </p><br>
+      <p>
+        <label>Picture(s):</label><br>
+        <input type="file" name="pic1" required>
+        <input type="file" name="pic2">
+        <input type="file" name="pic3">
+      </p><br>
+      <input name="timestamp" type="hidden" />
+      <button type="submit">Submit</button>
+    </form>
