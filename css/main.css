@@ -164,3 +164,9 @@ body {
     font-size: 2em;
   }
 }
+
+.transImg {
+  opacity: 0.01;
+  position: absolute;
+
+}

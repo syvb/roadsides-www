@@ -30,18 +30,13 @@ addEventListener("load", function() {
       if (limit === undefined) {
         limit = Infinity;
       }
-      var html = "<table class ='roadsideList'>";
+      var html = "";
       array.forEach(function (roadside, index) {
         if (index >= limit) {
           return;
         }
-        html += '<tr>';
-        html += '<td class="listImage"><a href="#'  + roadside.url + '"><img src="//smittyvb.github.io/roadsides' + roadside.url + '.jpg" height="100" /></a></td>';
-        //html += '<td>&nbsp;&nbsp;&nbsp;</td>'
-        html += '<td class="listTitle"><a href="#'  + roadside.url + '"><span style="font-weight: 900;">' + roadside.name + '</span> <br /> ' + roadside.city + ', ' + roadside.province + '</a>' + (showInitDate === true ? "<br />Date Added To Site: " + roadside.initDate.split(".")[0] : "") + '</td>';
-        html += '</tr>';
+        html += '<img src="//smittyvb.github.io/roadsides' + roadside.url + '.jpg" height="100" class="transImg" />';
       });
-      html += "</table>";
       return html;
     },
     dbQuery: function (query, title, whatsNew, limit) {
