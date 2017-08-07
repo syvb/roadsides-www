@@ -7,8 +7,8 @@ var Horseman = require('node-horseman');
 var fse = require("fs-extra");
 var request = require('sync-request');
 
-const BASE_URL = "http://new-roadside-stuff-smittyvb.c9users.io:8082/#";
-const ROADSIDE_LIST = "http://new-roadside-stuff-smittyvb.c9users.io:8081/roadsides";
+const BASE_URL = "http://localhost:8082/#";
+const ROADSIDE_LIST = "http://localhost:8081/roadsides";
 const optionDefinitions = [{
   name: 'all',
   alias: 'a',
@@ -166,12 +166,19 @@ function renderAll(toRender, index) {
     return;
   }
   var renderCurr = function() {
-    render(BASE_URL + toRender[index], toRender[index], function() {
-      renderAll(toRender, index + 1);
-    });
+    var numToRender = 12;
+    var rendered = 0;
+    for (var i = 0; i < numToRender; i++) {
+      render(BASE_URL + toRender[index + i + 1], toRender[index + i + 1], function() {
+        rendered++;
+        if (rendered === numToRender) {
+          renderAll(toRender, index + numToRender);
+        }
+      });
+    }
   };
-  if ((index % 5) === 0) {
-    setTimeout(renderCurr, 4500);
+  if ((index % 250) === 0) {
+    setTimeout(renderCurr, 0);
   } else {
     renderCurr();
   }
