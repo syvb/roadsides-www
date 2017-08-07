@@ -39,7 +39,7 @@ else if (options.all || options.index) {
 
 
   //copy data files from root, to roadside directory
-  /*if ((options.index === undefined) || (options.nodelete)) {
+  if ((options.index === undefined) || (options.nodelete)) {
     var roadsideTmpFilePath = "/tmp/roadsideData";
     fse.removeSync("roadside");
     fse.removeSync(roadsideTmpFilePath);
@@ -51,7 +51,7 @@ else if (options.all || options.index) {
     fse.removeSync("roadside/roadside-to-json");
     fse.removeSync("roadside/images");
     fse.removeSync("roadside/.gitignore");
-  }*/
+  }
   //delete index.html, and replace it with #/main
   fse.removeSync("roadside/index.html");
   render(BASE_URL + "main", "index");
