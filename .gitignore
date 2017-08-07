@@ -5,3 +5,4 @@ roadside-to-json/csvtojson.json
 prerendered/*
 roadside/*
 sitemap-gen/roadsides.xml
+node_modules
