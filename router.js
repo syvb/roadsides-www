@@ -35,6 +35,9 @@ addEventListener("load", function() {
         if (index >= limit) {
           return;
         }
+        if (roadside.archive === "hidden") {
+          return;
+        }
         html += '<tr>';
         html += '<td class="listImage"><a href="#'  + roadside.url + '"><img src="https://roadsideattractions.ca' + roadside.url + '.jpg" height="100" /></a></td>';
         //html += '<td>&nbsp;&nbsp;&nbsp;</td>'
@@ -88,8 +91,11 @@ addEventListener("load", function() {
           } else {
             roadsideData.noGps = false;
           }
-          if (!roadsideData.archive) {
+          if (roadsideData.archive === "FALSE") {
             roadsideData.archive = false;
+          }
+          if (roadsideData.archive === "TRUE") {
+            roadsideData.archive = true;
           }
           console.log(roadsideData);
           var html = Roadsides.ROADSIDE_TEMPLATE(roadsideData);
