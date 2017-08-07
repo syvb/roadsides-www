@@ -34,12 +34,12 @@ const options = commandLineArgs(optionDefinitions);
 if (options.file !== undefined) {
   render(BASE_URL + options.file, options.file);
 }
-else if (options.all) {
+else if (options.all || options.index) {
   //render entire site
 
 
   //copy data files from root, to roadside directory
-  if ((options.index === undefined) || (options.nodelete)) {
+  /*if ((options.index === undefined) || (options.nodelete)) {
     var roadsideTmpFilePath = "/tmp/roadsideData";
     fse.removeSync("roadside");
     fse.removeSync(roadsideTmpFilePath);
@@ -51,7 +51,7 @@ else if (options.all) {
     fse.removeSync("roadside/roadside-to-json");
     fse.removeSync("roadside/images");
     fse.removeSync("roadside/.gitignore");
-  }
+  }*/
   //delete index.html, and replace it with #/main
   fse.removeSync("roadside/index.html");
   render(BASE_URL + "main", "index");
@@ -100,7 +100,7 @@ else if (options.all) {
       });
   }
   //render every page
-  renderAll(renderList);
+  renderAll(renderList, options.index);
 
   //print timestamp
   console.log("Complete.");
@@ -143,11 +143,14 @@ function render(pageUrl, fileName, callback) {
         fse.writeFile("roadside/" + fileName + ".html", output, "utf-8", function(err) {
           console.log(err);
         });
-        horseman.close();
+        //setTimeout(function () {
+          horseman.close();
+        //}, 1000);
         if (callback) {
           callback();
         }
-      });
+      })
+      .catch(function (e) {console.log("Horseman error: " + e)});
   }
   catch (e) {
     console.log("Can't render " + pageUrl);

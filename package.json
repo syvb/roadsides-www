@@ -5,6 +5,7 @@
   "main": "node prerender --all",
   "dependencies": {
     "command-line-args": "^3.0.1",
+    "download": "^6.2.5",
     "fs-extra": "^1.0.0",
     "jimp": "^0.2.28",
     "node-horseman": "^3.1.1",

@@ -36,9 +36,9 @@ addEventListener("load", function() {
           return;
         }
         html += '<tr>';
-        html += '<td class="listImage"><a href="#'  + roadside.url + '"><img src="//smittyvb.github.io/roadsides' + roadside.url + '.jpg" height="100" /></a></td>';
+        html += '<td class="listImage"><a href="#'  + roadside.url + '"><img src="https://roadsideattractions.ca' + roadside.url + '.jpg" height="100" /></a></td>';
         //html += '<td>&nbsp;&nbsp;&nbsp;</td>'
-        html += '<td class="listTitle"><a href="#'  + roadside.url + '"><span style="font-weight: 900;">' + roadside.name + '</span> <br /> ' + roadside.city + ', ' + roadside.province + '</a>' + (showInitDate === true ? "<br />Date Added To Site: " + roadside.initDate.split(".")[0] : "") + '</td>';
+        html += '<td class="listTitle"><a href="#'  + roadside.url + '"><span style="font-weight: 900;">' + roadside.name + '</span> <br /> ' + roadside.city + ', ' + roadside.province + '</a>' + (showInitDate === true ? "<br />Date added to site: " + roadside.initDate.split(".")[0] : "") + '</td>';
         html += '</tr>';
       });
       html += "</table>";
@@ -70,12 +70,12 @@ addEventListener("load", function() {
             roadsideData.initDate = roadsideData.initDate.split(".")[0];
           }
           roadsideData.imgUrls = [
-            {imgUrl: "//smittyvb.github.io/roadsides" + roadsideData.url + ".jpg"}
+            {imgUrl: "https://roadsideattractions.ca" + roadsideData.url + ".jpg"}
           ];
           var extraPics = roadsideData.photos - 1;
           var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
           for (var i = 0; i < extraPics; i++) {
-            roadsideData.imgUrls.unshift({imgUrl: "//smittyvb.github.io/roadsides/lcra" + roadsideData.line + alphabet[i] + ".jpg"});
+            roadsideData.imgUrls.unshift({imgUrl: "https://roadsideattractions.ca/lcra" + roadsideData.line + alphabet[i] + ".jpg"});
           }
           if (extraPics === 0) {
             roadsideData.showGallery = false;
