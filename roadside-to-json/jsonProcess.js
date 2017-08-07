@@ -9,6 +9,10 @@ var NAME_IGNORE = [
 var fs = require("fs");
 
 var initJson = fs.readFileSync("csvtojson.json");
+initJson = String(initJson);
+if (initJson.indexOf("],") > -1) {
+  initJson = initJson.split("],")[0] + "]";
+}
 initJson = JSON.parse(initJson);
 var outJson = [];
 var curLineNum = 1;
