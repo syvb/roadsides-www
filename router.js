@@ -133,7 +133,7 @@ s.setAttribute('data-timestamp', +new Date());
         if (Roadsides.Router.provinceUrlMapping[pageName] === undefined) {
           return fail();
         }
-        Roadsides.Router.dbQuery("province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=city&archive=false",
+        Roadsides.Router.dbQuery("province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=city&archive=FALSE",
           Roadsides.Router.provinceUrlMapping[pageName]);
       },
       //alphabetical page
@@ -141,20 +141,20 @@ s.setAttribute('data-timestamp', +new Date());
         if (pageName.length !== 1) {
           return fail();
         }
-        Roadsides.Router.dbQuery("sortName_like=^" + pageName + "&_sort=sortName&archive=false", 
+        Roadsides.Router.dbQuery("sortName_like=^" + pageName + "&_sort=sortName&archive=FALSE", 
         "Alphabetical - " + pageName.toUpperCase());
       },
       function (pageName, fail) {
         if (pageName !== "alphabet") {
           return fail();
         }
-        Roadsides.Router.dbQuery("_sort=sortName&archive=false", "All Roadside Attractions");
+        Roadsides.Router.dbQuery("_sort=sortName&archive=FALSE", "All Roadside Attractions");
       },
       function (pageName, fail) {
         if (pageName !== "archive") {
           return fail();
         }
-        Roadsides.Router.dbQuery("_sort=sortName&archive=true", "Archive");
+        Roadsides.Router.dbQuery("_sort=sortName&archive=TRUE", "Archive");
       },
       function(pageName, fail) {
         if (pageName !== "whatsnew") {
