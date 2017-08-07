@@ -88,6 +88,9 @@ addEventListener("load", function() {
           } else {
             roadsideData.noGps = false;
           }
+          if (!roadsideData.archive) {
+            roadsideData.archive = false;
+          }
           console.log(roadsideData);
           var html = Roadsides.ROADSIDE_TEMPLATE(roadsideData);
 
