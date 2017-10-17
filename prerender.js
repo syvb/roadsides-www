@@ -31,6 +31,7 @@ const optionDefinitions = [{
   type: Boolean
 }];
 const options = commandLineArgs(optionDefinitions);
+var numToRend = 0;
 if (options.file !== undefined) {
   render(BASE_URL + options.file, options.file);
 }
@@ -99,6 +100,7 @@ else if (options.all || options.index) {
         renderList.push(roadside.url.substr(1, roadside.url.length));
       });
   }
+  numToRend = renderList.length;
   //render every page
   renderAll(renderList, options.index);
 
@@ -113,10 +115,10 @@ else {
 var output = "An error occured. Please try again later.";
 
 function render(pageUrl, fileName, callback) {
-  console.log("rendering: " + pageUrl);
+  //console.log("rendering: " + pageUrl);
   try {
     var horseman = new Horseman({
-      timeout: 10000,
+      timeout: 45000,
       loadImages: false,
       webSecurity: false,
       injectJquery: false
@@ -133,7 +135,7 @@ function render(pageUrl, fileName, callback) {
       .open(pageUrl)
       .waitForSelector(".loaded", 7500)
       .html("html").then(function(html) {
-        console.log("loaded: " + pageUrl);
+        //console.log("loaded: " + pageUrl);
         output = html.replace(new RegExp('"#/', "g"), '"/roadside/');
         output = output.split("<!--NO-PRERENDER-->");
         output = output[0] +
@@ -141,7 +143,7 @@ function render(pageUrl, fileName, callback) {
           output[1].split("<!--END-->")[1];
         output = "<!doctype html><html>" + output + "</html>";
         fse.writeFile("roadside/" + fileName + ".html", output, "utf-8", function(err) {
-          console.log(err);
+          //console.log(err);
         });
         //setTimeout(function () {
           horseman.close();
@@ -150,7 +152,7 @@ function render(pageUrl, fileName, callback) {
           callback();
         }
       })
-      .catch(function (e) {console.log("Horseman error: " + e)});
+      .catch(function (e) {console.error("Horseman error: " + e); return true;});
   }
   catch (e) {
     console.log("Can't render " + pageUrl);
@@ -166,19 +168,20 @@ function renderAll(toRender, index) {
     return;
   }
   var renderCurr = function() {
-    var numToRender = 12;
+    var numToRender = 1;
     var rendered = 0;
     for (var i = 0; i < numToRender; i++) {
-      render(BASE_URL + toRender[index + i + 1], toRender[index + i + 1], function() {
+      render(BASE_URL + toRender[index + i], toRender[index + i], function() {
         rendered++;
+        console.log("\x1B[2J"); console.log("Done: " + ((index / numToRend) * 100).toFixed(2) + "%. " + index + "/" + numToRend + " complete.");   
         if (rendered === numToRender) {
           renderAll(toRender, index + numToRender);
         }
       });
     }
   };
-  if ((index % 250) === 0) {
-    setTimeout(renderCurr, 0);
+  if ((index % 8) === 0) {
+    setTimeout(renderCurr, 735);
   } else {
     renderCurr();
   }

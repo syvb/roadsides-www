@@ -91,7 +91,7 @@ addEventListener("load", function() {
           } else {
             roadsideData.noGps = false;
           }
-          if (roadsideData.archive === "FALSE") {
+          if ((roadsideData.archive === "FALSE") || (roadsideData.archive === "hidden")) {
             roadsideData.archive = false;
           }
           if (roadsideData.archive === "TRUE") {
@@ -117,7 +117,6 @@ addEventListener("load", function() {
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
 
 var disqus_url = "roadsideattractions.ca/prerendered" + roadsideData.url;
-
 var disqus_config = function () {
 this.page.url = "roadsideattractions.ca/prerendered" + roadsideData.url;  // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier = roadsideData.url; // Replace PAGE_IDENTIFIER with your page's unique identifier variable

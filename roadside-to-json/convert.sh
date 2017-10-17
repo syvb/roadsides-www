@@ -9,5 +9,5 @@ echo "Processing file..."
 node jsonProcess.js
 echo "Copying to server..."
 cp io/processed.json ../../temp-api/roadsides.json
-echo "Done!"
+echo "Done."
 echo "Restart the backend server, now."
