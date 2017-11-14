@@ -4,6 +4,8 @@ echo "Starting!"
 kill $(fuser -n tcp 80 2> /dev/null)
 kill $(fuser -n tcp 8081 2> /dev/null)
 kill $(fuser -n tcp 8082 2> /dev/null)
+kill $(fuser -n tcp 8443 2> /dev/null)
+
 cd roadside-to-json
 sh convert.sh
 cd ..
