@@ -241,3 +241,28 @@ s.setAttribute('data-timestamp', +new Date());
 addEventListener("load", function() {
   Roadsides.Router.update();
 });
+
+//IE Fix
+//For some reason, IE won't detect hash changes correctly
+function isIE() {
+  if (navigator.appName == 'Microsoft Internet Explorer') {
+    var ua = navigator.userAgent;
+    var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+    if (re.exec(ua) != null) {
+      return true;
+    }
+  }
+  if (!!window.MSInputMethodContext && !!document.documentMode) {
+    return true; //IE11 detect
+  }
+  return false;
+}
+
+if (isIE()) {
+  var lastHash = location.hash;
+  setInterval(function () {
+    if (location.hash != lastHash) {
+      Roadsides.Router.update();
+    }
+  }, 550);
+}
