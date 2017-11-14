@@ -27,6 +27,6 @@ s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();
 
-if ((location.pathname === "/roadside/submit") || (location.hash.indexOf("submit") > -1)) {
+/*if ((location.pathname === "/roadside/submit") || (location.hash.indexOf("submit") > -1)) {
   setTimeout(function () {document.getElementById('a').innerHTML = '<iframe src="//submit.roadsideattractions.ca/" style="height: 55em;width: 72%;border: none;"></iframe>';}, 0);
-}
+}*/
