@@ -18,6 +18,7 @@ var twitterChange = function (req, res, next) {
       console.log("sending res")
       try {
         var roadsideData = JSON.parse(body)[0];
+        console.log(roadsideData);
       } catch (e) {
         next();
       }
