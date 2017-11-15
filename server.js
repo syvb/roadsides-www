@@ -46,7 +46,6 @@ app.use(ecstatic({
   showdir: true,
 }));
 
-app.use();
 
 http.createServer(app).listen(80);
 
