@@ -43,7 +43,7 @@ console.log(typeof twitterChange);
 
 app.use("/", twitterChange);
 
-app.get("/", function (req, res) {
+app.get("*", function (req, res) {
   if (req.path.startsWith("/roadside")) {
     if ((req.path === "/roadside") || (req.path === "/roadside/") || (req.path === "/roadside.html")) {
       req.path = "/roadside/index.html";
