@@ -17,7 +17,6 @@ var twitterChange = function (req, res, next) {
       roadsideUrl = req.path.split(".")[0];
     }
     request('http://localhost:8443/roadsides?url=' + roadsideUrl, function (error, response, body) {
-      var body = '';
       try {
         var roadsideData = JSON.parse(body)[0];
         console.log(roadsideData);
