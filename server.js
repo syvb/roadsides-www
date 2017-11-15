@@ -41,6 +41,15 @@ console.log(typeof twitterChange);
 
 app.use("/", twitterChange);
 
+app.use(function forceLiveDomain(req, res, next) {
+  if (req.url.startsWith("/roadside")) {
+    return res.redirect(302, '/#' + req.originalUrl.split("/roadside")[0];
+  }
+  if ((req.url !== "/") || (req.url !== "")) {
+    return res.redirect(302, '/#' + req.originalUrl.split("/")[1];
+  }
+});
+
 app.use(ecstatic({
   root: __dirname,
   showdir: true,
