@@ -11,7 +11,7 @@ var twitterChange = function (req, res, next) {
   if (userAgent.startsWith('facebookexternalhit/1.1') ||
   userAgent === 'Facebot' ||
   userAgent.startsWith('Twitterbot')) {
-    http.get("https://localhost:8443/roadsides?url=" + req.path, function (data) {
+    http.get("http://localhost:8443/roadsides?url=" + req.path, function (data) {
       var body = '';
       res.on('data', function(chunk) {
         body += chunk;
