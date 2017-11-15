@@ -18,6 +18,7 @@ var twitterChange = function (req, res, next) {
         body += chunk;
       });
       res.on('end', function() {
+        console.log("sending res")
         try {
           var roadsideData = JSON.parse(body)[0];
         } catch (e) {
