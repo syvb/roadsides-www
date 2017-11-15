@@ -10,7 +10,7 @@ app.use(function(req, res, next) {
         var userAgent = req.headers['user-agent'];
     if (userAgent.startsWith('facebookexternalhit/1.1') ||
     userAgent === 'Facebot' ||
-    userAgent.startsWith('Twitterbot') {
+    userAgent.startsWith('Twitterbot')) {
       http.get("https://localhost:8443/roadsides?url=" + req.path, function (data) {
         var body = '';
         res.on('data', function(chunk) {
