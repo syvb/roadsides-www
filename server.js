@@ -53,25 +53,25 @@ app.get("*", function (req, res) {
     }
     fs.access('./roadside' + req.path.split("/roadside")[0], fs.constants.F_OK, (err) => {
       if (err) {
-        puppeteer.launch().then(async browser => {
-          const page = await browser.newPage();
-          await page.goto('http://localhost:80');
-          const bodyHandle = await page.$('html');
-          const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-          res.send(html);
-          await bodyHandle.dispose();
-          await browser.close();
-          fs.writeFile("./roadside" + req.path.split("/roadside")[0], html, function(err) {
-            if(err) {
-                return console.log(err);
-            }
-            console.log("Saved roadside " + req.path);
-          }); 
         });
       } else {
         fs.readFile('./roadside', (err, data) => {
           if (err) {
-            return res.send(500, "Sorry, there was an error. (#2)");
+            puppeteer.launch().then(async browser => {
+            const page = await browser.newPage();
+            await page.goto('http://localhost:80');
+            const bodyHandle = await page.$('html');
+            const html = await page.evaluate(body => body.innerHTML, bodyHandle);
+            res.send(html);
+            await bodyHandle.dispose();
+            await browser.close();
+            fs.writeFile("./roadside" + req.path.split("/roadside")[0], html, function(err) {
+              if(err) {
+                  return console.log(err);
+              }
+              console.log("Saved roadside " + req.path);
+            }); 
+            return;
           }
           res.send(data)
         });
