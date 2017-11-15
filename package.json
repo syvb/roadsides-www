@@ -8,11 +8,13 @@
     "corser": "^2.0.1",
     "download": "^6.2.5",
     "ecstatic": "^3.0.0",
+    "express": "^4.16.2",
     "fs-extra": "^1.0.0",
     "http-proxy": "^1.16.2",
     "jimp": "^0.2.28",
     "node-horseman": "^3.1.1",
     "phantomjs": "^2.1.7",
+    "request": "^2.83.0",
     "sync-request": "^3.0.1",
     "union": "^0.4.6"
   },
