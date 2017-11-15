@@ -37,6 +37,8 @@ var twitterChange = function (req, res, next) {
   }
 }
 
+console.log(typeof twitterChange);
+
 app.use(twitterChange);
 
 app.use(ecstatic({
