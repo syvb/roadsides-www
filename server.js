@@ -6,7 +6,7 @@ const http = require('http');
 
 const app = express();
 
-app.use(function(req, res, next) {
+app.use("/", function(req, res, next) {
         var userAgent = req.headers['user-agent'];
     if (userAgent.startsWith('facebookexternalhit/1.1') ||
     userAgent === 'Facebot' ||
