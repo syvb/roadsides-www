@@ -42,7 +42,7 @@ console.log(typeof twitterChange);
 app.use("/", twitterChange);
 
 app.use(ecstatic({
-  root: ${__dirname},
+  root: __dirname,
   showdir: true,
 }));
 
