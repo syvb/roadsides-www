@@ -39,7 +39,7 @@ var twitterChange = function (req, res, next) {
 
 console.log(typeof twitterChange);
 
-app.use("/", function() {}, twitterChange);
+app.use("/", twitterChange);
 
 app.use(ecstatic({
   root: `${__dirname}/public`,
