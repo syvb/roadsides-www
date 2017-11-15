@@ -10,7 +10,7 @@ const options = commandLineArgs(optionDefinitions);
 
 puppeteer.launch().then(async browser => {
   const page = await browser.newPage();
-  await page.goto('https://localhost:80');
+  await page.goto('http://localhost:80');
   const bodyHandle = await page.$('html');
   const html = await page.evaluate(body => body.innerHTML, bodyHandle);
   console.log(html);
