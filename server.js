@@ -12,6 +12,7 @@ var twitterChange = function (req, res, next) {
   userAgent === 'Facebot' ||
   userAgent.startsWith('Twitterbot')) {
     http.get("http://localhost:8443/roadsides?url=" + req.path, function (data) {
+      console.log("Social bot - " + userAgent + ".");
       var body = '';
       res.on('data', function(chunk) {
         body += chunk;
