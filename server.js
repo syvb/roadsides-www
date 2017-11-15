@@ -51,7 +51,7 @@ app.get("/", function (req, res) {
     if (req.path.indexOf("..") > -1) {
       return res.send(500, "Sorry, there was an error. (#1)");
     }
-    fs.access('./roadside' + , fs.constants.F_OK, (err) => {
+    fs.access('./roadside' + req.path.split("/roadside")[0], fs.constants.F_OK, (err) => {
       if (err) {
         puppeteer.launch().then(async browser => {
           const page = await browser.newPage();
