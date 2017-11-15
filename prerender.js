@@ -146,7 +146,7 @@ function render(pageUrl, fileName, callback) {
           //console.log(err);
         });
         //setTimeout(function () {
-          horseman.close();
+          //horseman.close();
         //}, 1000);
         if (callback) {
           callback();
