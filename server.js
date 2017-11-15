@@ -8,17 +8,17 @@ const request = require('request');
 const app = express();
 
 var twitterChange = function (req, res, next) {
-  console.log(req.path);
   var userAgent = req.headers['user-agent'];
   if (userAgent.startsWith('facebookexternalhit/1.1') ||
   userAgent === 'Facebot' ||
   userAgent.startsWith('Twitterbot')) {
-    request('http://localhost:8443/roadsides?url=' + res.originalUrl, function (error, response, body) {
-      console.log("Social bot - " + userAgent + ".");
+    var roadsideUrl = req.path;
+    if (roadsideUrl.indexOf(".") > -1) {
+      roadsideUrl = req.path.split(".")[0];
+    }
+    request('http://localhost:8443/roadsides?url=' + roadsideUrl, function (error, response, body) {
       var body = '';
-      console.log("sending res")
       try {
-        console.log("db: " + body);
         var roadsideData = JSON.parse(body)[0];
         console.log(roadsideData);
       } catch (e) {
