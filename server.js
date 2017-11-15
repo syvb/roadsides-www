@@ -12,7 +12,7 @@ var twitterChange = function (req, res, next) {
   if (userAgent.startsWith('facebookexternalhit/1.1') ||
   userAgent === 'Facebot' ||
   userAgent.startsWith('Twitterbot')) {
-    request('http://www.google.com', function (error, response, body) {
+    request('http://localhost:8443/roadsides?url=' + res.path, function (error, response, body) {
       console.log("Social bot - " + userAgent + ".");
       var body = '';
       console.log("sending res")
