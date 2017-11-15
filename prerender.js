@@ -7,7 +7,7 @@ var Horseman = require('node-horseman');
 var fse = require("fs-extra");
 var request = require('sync-request');
 
-const BASE_URL = "http://localhost:8082/#";
+const BASE_URL = "http://localhost/#";
 const ROADSIDE_LIST = "http://localhost:8081/roadsides";
 const optionDefinitions = [{
   name: 'all',
