@@ -8,11 +8,12 @@ const request = require('request');
 const app = express();
 
 var twitterChange = function (req, res, next) {
+  console.log(req.path);
   var userAgent = req.headers['user-agent'];
   if (userAgent.startsWith('facebookexternalhit/1.1') ||
   userAgent === 'Facebot' ||
   userAgent.startsWith('Twitterbot')) {
-    request('http://localhost:8443/roadsides?url=' + res.path, function (error, response, body) {
+    request('http://localhost:8443/roadsides?url=' + res.originalUrl, function (error, response, body) {
       console.log("Social bot - " + userAgent + ".");
       var body = '';
       console.log("sending res")
