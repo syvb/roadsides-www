@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer");
 const commandLineArgs = require("command-line-args");
 const requestSync = require("sync-request");
+const fs = require("fs");
 
 const ROADSIDE_LIST = "http://localhost:8443/roadsides";
 
