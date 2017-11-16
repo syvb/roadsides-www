@@ -55,7 +55,7 @@ app.use("/", function (req, res, next) {
 });
 
 app.use(ecstatic({
-   root: ${__dirname},
+   root: __dirname,
    showdir: true,
 }));
 
