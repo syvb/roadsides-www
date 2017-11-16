@@ -67,6 +67,7 @@ function renderLoop() {
       });
       await bodyHandle.dispose();
       await browser.close();
+      console.log(roadsideUrl);
     });
   }
   setTimeout(renderLoop, 30000);
