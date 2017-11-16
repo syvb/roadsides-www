@@ -57,9 +57,6 @@ const options = commandLineArgs(optionDefinitions);
 
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
-  if (err) {
-    console.error(err);
-  }
   var curRenderList = JSON.parse(JSON.stringify(renderList));
   for (var i = 0; curRenderList.length > 0; i++) {
     let roadsideUrl = curRenderList.pop();
