@@ -5,38 +5,38 @@ const request = require("request");
 const ROADSIDE_LIST = "http://localhost:8081/roadsides";
 
 var renderList = [
-    //static pages
-    "contact",
-    "founder",
-    "pics",
-    "province",
-    //all roadsides page
-    "alphabet",
-    //province pages
-    "alberta",
-    "bc",
-    "manitoba",
-    "newbrunswick",
-    "nfld",
-    "nwt",
-    "novascotia",
-    "nunavut",
-    "ontario",
-    "pei",
-    "quebec",
-    "sask",
-    "yukon",
-    //other
-    "archive",
-    "whatsnew",
-    "tch",
-    "type",
-    "tags",
-    "terms",
-    "media",
-    "extras",
-    "submit"
-    "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"
+  //static pages
+  "contact",
+  "founder",
+  "pics",
+  "province",
+  //all roadsides page
+  "alphabet",
+  //province pages
+  "alberta",
+  "bc",
+  "manitoba",
+  "newbrunswick",
+  "nfld",
+  "nwt",
+  "novascotia",
+  "nunavut",
+  "ontario",
+  "pei",
+  "quebec",
+  "sask",
+  "yukon",
+  //other
+  "archive",
+  "whatsnew",
+  "tch",
+  "type",
+  "tags",
+  "terms",
+  "media",
+  "extras",
+  "submit",
+  "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"
 ];
 
 JSON.parse(request("GET", ROADSIDE_LIST).body.toString())
@@ -62,7 +62,9 @@ function renderLoop() {
       await page.goto('http://localhost:80/#' + roadsideUrl);
       const bodyHandle = await page.$('html');
       const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-      console.log(html);
+      fs.writeFile('/roadside' + roadsideUrl, html, (err) => {
+        if (err) throw err;
+      });
       await bodyHandle.dispose();
       await browser.close();
     });
