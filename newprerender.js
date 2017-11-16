@@ -72,6 +72,7 @@ function render(roadsideUrl, cb) {
 function renderAll(toRender) {
   if (toRender.length === 0) {
     return;
+    setTimeout(renderLoop);
   }
   render(toRender.shift(), function () {
     renderAll(toRender);
@@ -81,6 +82,5 @@ function renderAll(toRender) {
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
   renderAll(JSON.parse(JSON.stringify(renderList)));
-  setTimeout(renderLoop, curRenderList.length * 1500);
 }
 renderLoop();
