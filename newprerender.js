@@ -61,10 +61,10 @@ function render(roadsideUrl, cb) {
     await page.goto('http://localhost:80/#/' + roadsideUrl);
     const bodyHandle = await page.$('html');
     let html = await page.evaluate(body => body.innerHTML, bodyHandle);
-    output = html.replace(new RegExp('"#/', "g"), '"/roadside/');
-    output = output.split("<!--NO-PRERENDER-->");
-    output = output[0] + "<script src='hashtourl.js'></script>" + output[1].split("<!--END-->")[1];
-    output = "<!doctype html><html>" + output + "</html>";
+    html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
+    html = html.split("<!--NO-PRERENDER-->");
+    html = html[0] + "<script src='hashtourl.js'></script>" + html[1].split("<!--END-->")[1];
+    html = "<!doctype html><html>" + html + "</html>";
     fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
       if (err) throw err;
     });
