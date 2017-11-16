@@ -57,6 +57,7 @@ const options = commandLineArgs(optionDefinitions);
 
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
+    console.log("Starting to render " + roadsideUrl + ".");
     const page = await browser.newPage();
     await page.goto('http://localhost:80/#/' + roadsideUrl);
     const bodyHandle = await page.$('html');
@@ -69,7 +70,7 @@ function render(roadsideUrl, cb) {
     });
     await bodyHandle.dispose();
     await browser.close();
-    cb();
+    cb(roadsideUrl);
   });
 }
 
@@ -78,9 +79,8 @@ function renderAll(toRender) {
     return;
     setTimeout(renderLoop, 30000);
   }
-  render(toRender.shift(), function () {
-    process.stdout.write('\x1B[2J\x1B[0f');
-    console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!");
+  render(toRender.shift(), function (rendered) {
+    console.log("Rendered " + rendered + ".");
     renderAll(toRender);
   });
 }
@@ -88,6 +88,7 @@ function renderAll(toRender) {
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
   exec("sh roadside-to-json/convert.sh", function () {
+    console.log("Converted JSON!");
     renderAll(JSON.parse(JSON.stringify(renderList)));
     console.log("Rendered. Rendering again in 2 minutes.");
     setTimeout(renderLoop, 120000);
