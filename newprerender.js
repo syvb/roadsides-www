@@ -76,7 +76,7 @@ function renderAll(toRender) {
     setTimeout(renderLoop);
   }
   render(toRender.shift(), function () {
-    renderAll(toRender);
+    renderAll(toRender, 30000);
   });
 }
 
