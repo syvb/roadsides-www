@@ -55,24 +55,29 @@ const options = commandLineArgs(optionDefinitions);
 
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
-  var curRenderList = JSON.parse(JSON.stringify(renderList));
-  for (var i = 0; curRenderList.length > 0; i++) {
-    let roadsideUrl = curRenderList.pop();
-    setTimeout(function () {
-      puppeteer.launch().then(async browser => {
-        const page = await browser.newPage();
-        await page.goto('http://localhost:80/#/' + roadsideUrl);
-        const bodyHandle = await page.$('html');
-        const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-        fs.writeFile(__dirname + '/roadside/' + roadsideUrl + ".html", html, (err) => {
-          if (err) throw err;
+  exec('sh roadside-to-json/convert.sh', (err, stdout, stderr) => {
+    if (err) {
+      console.error(err);
+    }
+    var curRenderList = JSON.parse(JSON.stringify(renderList));
+    for (var i = 0; curRenderList.length > 0; i++) {
+      let roadsideUrl = curRenderList.pop();
+      setTimeout(function () {
+        puppeteer.launch().then(async browser => {
+          const page = await browser.newPage();
+          await page.goto('http://localhost:80/#/' + roadsideUrl);
+          const bodyHandle = await page.$('html');
+          const html = await page.evaluate(body => body.innerHTML, bodyHandle);
+          fs.writeFile(__dirname + '/roadside/' + roadsideUrl + ".html", html, (err) => {
+            if (err) throw err;
+          });
+          await bodyHandle.dispose();
+          await browser.close();
+          console.log(roadsideUrl + " is rendered!");
         });
-        await bodyHandle.dispose();
-        await browser.close();
-        console.log(roadsideUrl + " is rendered!");
-      });
-    }, i * 1500);
-  }
+      }, i * 1500);
+    }
+  });
   setTimeout(renderLoop, 30000);
 }
 renderLoop();
