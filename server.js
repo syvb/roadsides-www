@@ -71,6 +71,7 @@ app.get("*", function (req, res) {
       } else {
         res.send(data);
       }
+    });
   }
 });
 
