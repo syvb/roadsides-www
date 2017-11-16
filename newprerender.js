@@ -39,7 +39,7 @@ var renderList = [
   "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"
 ];
 
-JSON.parse(requestSync(ROADSIDE_LIST).body.toString())
+JSON.parse(requestSync("GET", ROADSIDE_LIST).body.toString())
   .forEach(function(roadside) {
     renderList.push(roadside.url.substr(1, roadside.url.length));
 });
