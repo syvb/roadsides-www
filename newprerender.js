@@ -71,7 +71,7 @@ function renderLoop() {
         await browser.close();
         console.log(roadsideUrl + " is rendered!");
       });
-    }, i * 1000);
+    }, i * 100);
   }
   setTimeout(renderLoop, 30000);
 }
