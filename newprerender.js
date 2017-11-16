@@ -77,8 +77,8 @@ function renderAll(toRender) {
     setTimeout(renderLoop, 30000);
   }
   render(toRender.shift(), function () {
-    //process.stdout.write('\x1B[2J\x1B[0f');
-    //console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!");
+    process.stdout.write('\x1B[2J\x1B[0f');
+    console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!");
     renderAll(toRender);
   });
 }
