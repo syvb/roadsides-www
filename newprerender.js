@@ -76,7 +76,7 @@ function renderAll(toRender) {
   }
   render(toRender.shift(), function () {
     process.stdout.write('\x1B[2J\x1B[0f');
-    console.log( ((toRender.length / renderList.length) * 100).toFixed(1) + "% done!");
+    console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!");
     renderAll(toRender);
   });
 }
