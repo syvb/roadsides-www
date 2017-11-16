@@ -64,7 +64,7 @@ function renderLoop() {
         await page.goto('http://localhost:80/#/' + roadsideUrl);
         const bodyHandle = await page.$('html');
         const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-        fs.writeFile('/roadside/' + roadsideUrl + ".html", html, (err) => {
+        fs.writeFile(__dirname + '/roadside/' + roadsideUrl + ".html", html, (err) => {
           if (err) throw err;
         });
         await bodyHandle.dispose();
