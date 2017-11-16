@@ -8,6 +8,7 @@ const exec = require("child_process").exec;
 const ROADSIDE_LIST = "http://localhost:8443/roadsides";
 
 var renderList = [
+  "main",
   //static pages
   "contact",
   "founder",
@@ -60,7 +61,7 @@ function render(roadsideUrl, cb) {
     await page.goto('http://localhost:80/#/' + roadsideUrl);
     const bodyHandle = await page.$('html');
     const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-    fs.writeFile(__dirname + '/roadside/' + roadsideUrl + ".html", html, (err) => {
+    fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
       if (err) throw err;
     });
     await bodyHandle.dispose();
@@ -83,6 +84,10 @@ function renderAll(toRender) {
 
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
-  renderAll(JSON.parse(JSON.stringify(renderList)));
+  exec("sh roadside-to-json/convert.sh", function () {
+    renderAll(JSON.parse(JSON.stringify(renderList)));
+    console.log("Rendered. Rendering again in 2 minutes.");
+    setTimeout(renderLoop, 120000);
+  });
 }
 renderLoop();
