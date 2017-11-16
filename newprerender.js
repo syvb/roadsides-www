@@ -79,7 +79,7 @@ function renderLoop() {
         });
       }, i * 1500);
     }
+    setTimeout(renderLoop, curRenderList.length * 1500);
   });
-  setTimeout(renderLoop, 30000);
 }
 renderLoop();
