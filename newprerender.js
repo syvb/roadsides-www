@@ -3,6 +3,8 @@ const commandLineArgs = require("command-line-args");
 const requestSync = require("sync-request");
 const fs = require("fs-extra");
 
+const exec = require("child_process").exec;
+
 const ROADSIDE_LIST = "http://localhost:8443/roadsides";
 
 var renderList = [
