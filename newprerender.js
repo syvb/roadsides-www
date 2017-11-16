@@ -55,20 +55,22 @@ const options = commandLineArgs(optionDefinitions);
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
   var curRenderList = JSON.parse(JSON.stringify(renderList));
-  while (curRenderList.length > 0) {
-    var roadsideUrl = curRenderList.pop();
-    puppeteer.launch().then(async browser => {
-      const page = await browser.newPage();
-      await page.goto('http://localhost:80/#' + roadsideUrl);
-      const bodyHandle = await page.$('html');
-      const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-      fs.writeFile('/roadside' + roadsideUrl, html, (err) => {
-        if (err) throw err;
+  for (var i = 0; curRenderList.length > 0; i++) {
+    let roadsideUrl = curRenderList.pop();
+    setTimeout(function () {
+      puppeteer.launch().then(async browser => {
+        const page = await browser.newPage();
+        await page.goto('http://localhost:80/#' + roadsideUrl);
+        const bodyHandle = await page.$('html');
+        const html = await page.evaluate(body => body.innerHTML, bodyHandle);
+        fs.writeFile('/roadside' + roadsideUrl, html, (err) => {
+          if (err) throw err;
+        });
+        await bodyHandle.dispose();
+        await browser.close();
+        console.log(roadsideUrl + " is rendered!");
       });
-      await bodyHandle.dispose();
-      await browser.close();
-      console.log(roadsideUrl);
-    });
+    }, i * .1);
   }
   setTimeout(renderLoop, 30000);
 }
