@@ -54,27 +54,33 @@ const optionDefinitions = [{
 }];
 const options = commandLineArgs(optionDefinitions);
 
+function render(roadsideUrl, cb) {
+  puppeteer.launch().then(async browser => {
+    const page = await browser.newPage();
+    await page.goto('http://localhost:80/#/' + roadsideUrl);
+    const bodyHandle = await page.$('html');
+    const html = await page.evaluate(body => body.innerHTML, bodyHandle);
+    fs.writeFile(__dirname + '/roadside/' + roadsideUrl + ".html", html, (err) => {
+      if (err) throw err;
+    });
+    await bodyHandle.dispose();
+    await browser.close();
+    console.log(roadsideUrl + " is rendered!");
+  });
+}
+
+function renderAll(toRender) {
+  if (toRender.length === 0) {
+    return;
+  }
+  render(toRender.shift(), function () {
+    renderAll(toRender);
+  });
+}
 
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
-  var curRenderList = JSON.parse(JSON.stringify(renderList));
-  for (var i = 0; curRenderList.length > 0; i++) {
-    let roadsideUrl = curRenderList.pop();
-    setTimeout(function () {
-      puppeteer.launch().then(async browser => {
-        const page = await browser.newPage();
-        await page.goto('http://localhost:80/#/' + roadsideUrl);
-        const bodyHandle = await page.$('html');
-        const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-        fs.writeFile(__dirname + '/roadside/' + roadsideUrl + ".html", html, (err) => {
-          if (err) throw err;
-        });
-        await bodyHandle.dispose();
-        await browser.close();
-        console.log(roadsideUrl + " is rendered!");
-      });
-    }, i * 1500);
-  }
+  renderAll(JSON.parse(JSON.stringify(renderList)));
   setTimeout(renderLoop, curRenderList.length * 1500);
 }
 renderLoop();
