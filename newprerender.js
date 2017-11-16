@@ -57,7 +57,6 @@ const options = commandLineArgs(optionDefinitions);
 
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
-  exec('sh roadside-to-json/convert.sh', (err, stdout, stderr) => {
     if (err) {
       console.error(err);
     }
