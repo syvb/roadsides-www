@@ -87,6 +87,7 @@ function renderAll(toRender) {
 
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
+  console.log("Starting!");
   exec("sh roadside-to-json/convert.sh", function () {
     console.log("Converted JSON!");
     renderAll(JSON.parse(JSON.stringify(renderList)));
