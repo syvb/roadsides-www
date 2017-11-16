@@ -65,7 +65,6 @@ function render(roadsideUrl, cb) {
     });
     await bodyHandle.dispose();
     await browser.close();
-    console.log(roadsideUrl + " is rendered!");
     cb();
   });
 }
@@ -73,10 +72,12 @@ function render(roadsideUrl, cb) {
 function renderAll(toRender) {
   if (toRender.length === 0) {
     return;
-    setTimeout(renderLoop);
+    setTimeout(renderLoop, 30000);
   }
   render(toRender.shift(), function () {
-    renderAll(toRender, 30000);
+    process.stdout.write('\x1B[2J\x1B[0f');
+    console.log( (((toRender + 1) / renderList.length) * 100).toFixed(1) + "% done!");
+    renderAll(toRender);
   });
 }
 
