@@ -43,37 +43,21 @@ console.log(typeof twitterChange);
 
 app.use("/", twitterChange);
 
-app.get("*", function (req, res) {
-  if (req.path.startsWith("/roadside")) {
-    if ((req.path === "/roadside") || (req.path === "/roadside/") || (req.path === "/roadside.html")) {
-      req.path = "/roadside/index.html";
-    }
-    if (req.path.indexOf("..") > -1) {
-      return res.send(500, "Sorry, there was an error. (#1)");
-    }
-    fs.readFile('./roadside', function (err, data) {
-      if (err) {
-        puppeteer.launch().then(async browser => {
-        const page = await browser.newPage();
-        await page.goto('http://localhost:80');
-        const bodyHandle = await page.$('html');
-        const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-        res.send(html);
-        await bodyHandle.dispose();
-        await browser.close();
-        fs.writeFile("./roadside" + req.path.split("/roadside")[0], html, function(err) {
-          if(err) {
-              return console.log(err);
-          }
-          console.log("Saved roadside " + req.path);
-        }); 
-        return;
-      } else {
-        res.send(data);
-      }
-    });
+app.use("/", function (req, res, next) {
+  //apply any needed redirects
+  if (req.path.substr(0,9) !== "/roadside") {
+    return res.redirect(302, "/roadside" + req.path);
   }
+  if (req.path.split(".")[req.path.split(".").length - 1] === "htm"]) {
+    return res.redirect(302, req.path + "l");
+  }
+  next();
 });
+
+app.use(ecstatic({
+   root: ${__dirname},
+   showdir: true,
+}));
 
 http.createServer(app).listen(80);
 
