@@ -48,7 +48,7 @@ app.use("/", function (req, res, next) {
   if (req.path.substr(0,9) !== "/roadside") {
     return res.redirect(302, "/roadside" + req.path);
   }
-  if (req.path.split(".")[req.path.split(".").length - 1] === "htm"]) {
+  if (req.path.split(".")[req.path.split(".").length - 1] === "htm") {
     return res.redirect(302, req.path + "l");
   }
   next();
