@@ -66,6 +66,7 @@ function render(roadsideUrl, cb) {
     await bodyHandle.dispose();
     await browser.close();
     console.log(roadsideUrl + " is rendered!");
+    cb();
   });
 }
 
