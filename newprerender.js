@@ -61,10 +61,10 @@ function renderLoop() {
     setTimeout(function () {
       puppeteer.launch().then(async browser => {
         const page = await browser.newPage();
-        await page.goto('http://localhost:80/#' + roadsideUrl);
+        await page.goto('http://localhost:80/#/' + roadsideUrl);
         const bodyHandle = await page.$('html');
         const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-        fs.writeFile('/roadside' + roadsideUrl, html, (err) => {
+        fs.writeFile('/roadside/' + roadsideUrl, html, (err) => {
           if (err) throw err;
         });
         await bodyHandle.dispose();
