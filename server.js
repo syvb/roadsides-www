@@ -47,7 +47,6 @@ app.use("/", function (req, res, next) {
   //apply any needed redirects
   if (req.path.endsWith(".jpg")) {
     return res.redirect(302, "/images" + req.path);
-    return next();
   }
   if (req.path.indexOf("spa") > - 1) {
     return next();
