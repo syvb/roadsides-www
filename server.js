@@ -45,8 +45,8 @@ app.use("/", twitterChange);
 
 app.use("/", function (req, res, next) {
   //apply any needed redirects
-  if (req.path === "/spa/") {
-    req.url = "/";
+  if (req.path.startsWith("/spa")) {
+    req.url = req.path.split("/spa")[1];
     return next();
   }
   if (req.path.substr(0,9) !== "/roadside") {
