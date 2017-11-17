@@ -59,7 +59,7 @@ function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
     await page.goto('http://localhost:80/spa/#/' + roadsideUrl);
-    await page.waitForSelector(".loaded");
+    await page.waitFor(".loaded");
     var html = await page.evaluate(() => document.documentElement.outerHTML);
     html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
     html = html.split("<!--NO-PRERENDER-->");
