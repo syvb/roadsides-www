@@ -60,7 +60,7 @@ function render(roadsideUrl, cb) {
     const page = await browser.newPage();
     await page.goto('http://localhost:80/spa/#/' + roadsideUrl);
     const bodyHandle = await page.$('html');
-    const html = await page.evaluate(body => body.innerHTML, bodyHandle);
+    var html = await page.evaluate(body => body.innerHTML, bodyHandle);
     html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
     html = html.split("<!--NO-PRERENDER-->");
     html = html[0] +
