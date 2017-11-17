@@ -1,5 +1,5 @@
 var Roadsides = window.Roadsides || {};
-Roadsides.API_LOC = "https://" + location.hostname + ":8443/"; //set to location of API server
+Roadsides.API_LOC = "http://" + location.hostname + ":8443/"; //set to location of API server
 /*
 Each item in the routing table is evaluated, in order from top to bottom.
 If one succeeds, then the program stop going through the table.
