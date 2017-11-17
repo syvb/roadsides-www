@@ -55,10 +55,10 @@ app.use("/", function (req, res, next) {
     return next();
   }
   if (req.path.substr(0,9) !== "/roadside") {
-    return res.redirect(302, "/roadside" + req.path);
+    return res.redirect(301, "/roadside" + req.path);
   }
   if (req.path.split(".")[req.path.split(".").length - 1] === "htm") {
-    return res.redirect(302, req.path + "l");
+    return res.redirect(301, req.path + "l");
   }
   next();
 });
