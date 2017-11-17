@@ -45,8 +45,7 @@ app.use("/", twitterChange);
 
 app.use("/", function (req, res, next) {
   //apply any needed redirects
-  /*if (req.path.indexOf("spa") > - 1) {
-    //req.url = req.path.split("/spa")[1];
+  if (req.path.indexOf("spa") > - 1) {
     return next();
   }
   if (req.path.substr(0,9) !== "/roadside") {
@@ -54,7 +53,7 @@ app.use("/", function (req, res, next) {
   }
   if (req.path.split(".")[req.path.split(".").length - 1] === "htm") {
     return res.redirect(302, req.path + "l");
-  }*/
+  }
   next();
 });
 
