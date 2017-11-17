@@ -59,8 +59,7 @@ function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
     await page.goto('http://localhost:80/spa/#/' + roadsideUrl);
-    const bodyHandle = await page.$('html');
-    var html = await page.evaluate(body => body.innerHTML, bodyHandle);
+    var html = await page.evaluate(() => document.documentElement.outerHTML);
     html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
     html = html.split("<!--NO-PRERENDER-->");
     html = html[0] +
@@ -70,7 +69,6 @@ function render(roadsideUrl, cb) {
     fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
       if (err) throw err;
     });
-    await bodyHandle.dispose();
     await browser.close();
     cb();
   });
