@@ -58,7 +58,7 @@ const options = commandLineArgs(optionDefinitions);
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
-    await page.goto('http://localhost:80/#/' + roadsideUrl);
+    await page.goto('http://localhost:80/spa/#/' + roadsideUrl);
     const bodyHandle = await page.$('html');
     const html = await page.evaluate(body => body.innerHTML, bodyHandle);
     fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
