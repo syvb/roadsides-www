@@ -58,7 +58,7 @@ const options = commandLineArgs(optionDefinitions);
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
-    await page.goto('http://localhost:80/spa/#/' + roadsideUrl);
+    await page.goto('http://localhost:80/#/' + roadsideUrl);
     await page.waitFor(".loaded");
     var html = await page.evaluate(() => document.documentElement.outerHTML);
     html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
