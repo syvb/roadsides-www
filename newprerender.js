@@ -61,11 +61,14 @@ function render(roadsideUrl, cb) {
     const page = await browser.newPage();
     await page.goto('http://localhost:80/#/' + roadsideUrl);
     const bodyHandle = await page.$('html');
-    const html = await page.evaluate(body => body.innerHTML, bodyHandle);
-    const linkedHtml = html.replace(new RegExp('"#/', "g"), '"/roadside/')
-    const htmlParts = linkedHtml.split("<!--NO-PRERENDER-->");
-    const realHtml = "<!doctype html><html>" + htmlParts[0] + "<script src='hashtourl.js'></script>" + htmlParts[1].split("<!--END-->")[1]+ "</html>";
-    fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", realHtml, (err) => {
+    let html = await page.evaluate(body => body.innerHTML, bodyHandle);
+    html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
+    html = html.split("<!--NO-PRERENDER-->");
+    html = html[0] +
+      "<script src='hashtourl.js'></script>" +
+      html[1].split("<!--END-->")[1];
+    html = "<!doctype html><html>" + html + "</html>";
+    fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
       if (err) throw err;
     });
     await bodyHandle.dispose();
