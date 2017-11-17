@@ -90,7 +90,7 @@ function renderAll(toRender) {
 
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
-  execSync("cd roadside-to-json;sh convert.sh;cd ..");
+  //execSync("cd roadside-to-json;sh convert.sh;cd ..");
   renderAll(JSON.parse(JSON.stringify(renderList)));
 }
 renderLoop();
