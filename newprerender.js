@@ -57,7 +57,6 @@ const options = commandLineArgs(optionDefinitions);
 
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
-    console.log("Starting to render " + roadsideUrl + ".");
     const page = await browser.newPage();
     await page.goto('http://localhost:80/#/' + roadsideUrl);
     const bodyHandle = await page.$('html');
