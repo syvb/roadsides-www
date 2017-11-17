@@ -6,3 +6,4 @@ prerendered/*
 roadside/*
 sitemap-gen/roadsides.xml
 node_modules
+spa
