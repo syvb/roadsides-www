@@ -3,7 +3,7 @@ const commandLineArgs = require("command-line-args");
 const requestSync = require("sync-request");
 const fs = require("fs-extra");
 
-const execSync = require("child_process").exec;
+const exec = require("child_process").exec;
 
 const ROADSIDE_LIST = "http://localhost:8443/roadsides";
 
@@ -58,13 +58,6 @@ const options = commandLineArgs(optionDefinitions);
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
-    await page.setRequestInterception(true);
-    page.on('request', request => {
-      if (request.resourceType == 'websocket') {
-        console.error("Websocket? Why?");
-      }
-      request.continue();
-    });
     await page.goto('http://localhost:80/#/' + roadsideUrl);
     const bodyHandle = await page.$('html');
     const html = await page.evaluate(body => body.innerHTML, bodyHandle);
@@ -73,11 +66,7 @@ function render(roadsideUrl, cb) {
     });
     await bodyHandle.dispose();
     await browser.close();
-    cb(roadsideUrl);
-  }).catch(function (err) {
-    console.error("Error rendering " + roadsideUrl);
-    console.error(err);
-    cb(roadsideUrl);
+    cb();
   });
 }
 
@@ -86,17 +75,19 @@ function renderAll(toRender) {
     return;
     setTimeout(renderLoop, 30000);
   }
-  render(toRender.shift(), function (rendered) {
+  render(toRender.shift(), function () {
+    process.stdout.write('\x1B[2J\x1B[0f');
+    console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!");
     renderAll(toRender);
   });
 }
 
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
-  console.log("Starting!");
-  execSync("sh roadside-to-json/convert.sh");
-  console.log("Converted JSON!");
-  renderAll(JSON.parse(JSON.stringify(renderList)));
-  console.log("Rendered. Rendering again in 2 minutes.");
+  exec("sh roadside-to-json/convert.sh", function () {
+    renderAll(JSON.parse(JSON.stringify(renderList)));
+    console.log("Rendered. Rendering again in 2 minutes.");
+    setTimeout(renderLoop, 120000);
+  });
 }
 renderLoop();
