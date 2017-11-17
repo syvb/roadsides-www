@@ -3,7 +3,7 @@ const commandLineArgs = require("command-line-args");
 const requestSync = require("sync-request");
 const fs = require("fs-extra");
 
-const exec = require("child_process").exec;
+const execSync = require("child_process").exec;
 
 const ROADSIDE_LIST = "http://localhost:8443/roadsides";
 
@@ -88,11 +88,9 @@ function renderAll(toRender) {
 //Main loop. This keeps running, rendering everything.
 function renderLoop() {
   console.log("Starting!");
-  exec("sh roadside-to-json/convert.sh", function () {
-    console.log("Converted JSON!");
-    renderAll(JSON.parse(JSON.stringify(renderList)));
-    console.log("Rendered. Rendering again in 2 minutes.");
-    setTimeout(renderLoop, 120000);
-  });
+  execSync("sh roadside-to-json/convert.sh");
+  console.log("Converted JSON!");
+  renderAll(JSON.parse(JSON.stringify(renderList)));
+  console.log("Rendered. Rendering again in 2 minutes.");
 }
 renderLoop();
