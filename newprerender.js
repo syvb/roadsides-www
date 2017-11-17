@@ -70,6 +70,7 @@ function render(roadsideUrl, cb) {
     cb(roadsideUrl);
   }).catch(function () {
     console.log("Error rendering " + roadsideUrl);
+    cb(roadsideUrl);
   });
 }
 
@@ -79,7 +80,6 @@ function renderAll(toRender) {
     setTimeout(renderLoop, 30000);
   }
   render(toRender.shift(), function (rendered) {
-    console.log("Rendered " + rendered + ".");
     renderAll(toRender);
   });
 }
