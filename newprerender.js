@@ -57,21 +57,25 @@ const options = commandLineArgs(optionDefinitions);
 
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
-    const page = await browser.newPage();
-    await page.goto('http://localhost:80/#/' + roadsideUrl);
-    await page.waitFor(".loaded");
-    var html = await page.evaluate(() => document.documentElement.outerHTML);
-    html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
-    html = html.split("<!--NO-PRERENDER-->");
-    html = html[0] +
-      "<script src='hashtourl.js'></script>" +
-      html[1].split("<!--END-->")[1];
-    output = "<!doctype html><html>" + html + "</html>";
-    fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
-      if (err) throw err;
-    });
-    await browser.close();
-    cb();
+    try {
+      const page = await browser.newPage();
+      await page.goto('http://localhost:80/#/' + roadsideUrl);
+      await page.waitFor(".loaded");
+      var html = await page.evaluate(() => document.documentElement.outerHTML);
+      html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
+      html = html.split("<!--NO-PRERENDER-->");
+      html = html[0] +
+        "<script src='hashtourl.js'></script>" +
+        html[1].split("<!--END-->")[1];
+      output = "<!doctype html><html>" + html + "</html>";
+      fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
+        if (err) throw err;
+      });
+      await browser.close();
+      cb();
+    } catch (e) {
+      console.error(e);
+    }
   });
 }
 
