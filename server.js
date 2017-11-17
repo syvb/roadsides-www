@@ -46,7 +46,7 @@ app.use("/", twitterChange);
 app.use("/", function (req, res, next) {
   //apply any needed redirects
   if (req.path.endsWith(".jpg")) {
-    //req.url = "images" + req.path;
+    return res.redirect(302, "/images" + req.path);
     return next();
   }
   if (req.path.indexOf("spa") > - 1) {
