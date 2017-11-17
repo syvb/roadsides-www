@@ -68,6 +68,8 @@ function render(roadsideUrl, cb) {
     await bodyHandle.dispose();
     await browser.close();
     cb(roadsideUrl);
+  }).catch(function () {
+    console.log("Error rendering " + roadsideUrl);
   });
 }
 
