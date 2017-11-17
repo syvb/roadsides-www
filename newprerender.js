@@ -57,6 +57,7 @@ const options = commandLineArgs(optionDefinitions);
 
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
+    const page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', request => {
       if (request.resourceType == 'websocket') {
@@ -64,7 +65,6 @@ function render(roadsideUrl, cb) {
       }
       request.continue();
     });
-    const page = await browser.newPage();
     await page.goto('http://localhost:80/#/' + roadsideUrl);
     const bodyHandle = await page.$('html');
     const html = await page.evaluate(body => body.innerHTML, bodyHandle);
