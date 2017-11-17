@@ -47,7 +47,7 @@ app.use("/", function (req, res, next) {
   //apply any needed redirects
   if (req.path === "/spa/") {
     req.url = "/";
-    return;
+    return next();
   }
   if (req.path.substr(0,9) !== "/roadside") {
     return res.redirect(302, "/roadside" + req.path);
