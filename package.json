@@ -4,6 +4,7 @@
   "description": "",
   "main": "node prerender --all",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "command-line-args": "^3.0.1",
     "corser": "^2.0.1",
     "download": "^6.2.5",
