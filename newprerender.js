@@ -53,8 +53,7 @@ const optionDefinitions = [{
   type: String,
   defaultOption: true
 }];
-const options = commandLineArgs(optionDefinitions);
-
+const options = commandLineArgs(optionDefinitions);\
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
@@ -74,22 +73,27 @@ function render(roadsideUrl, cb) {
     cb();
   });
 }
-
-function renderAll(toRender) {
-  if (toRender.length === 0) {
-    return;
-    setTimeout(renderLoop, 30000);
-  }
-  render(toRender.shift(), function () {
-    process.stdout.write('\x1B[2J\x1B[0f');
-    console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!");
-    renderAll(toRender);
+if (options.file) {
+  render(options.file, function () {
+    console.log("Rendered " + options.file);
   });
-}
+} else {
+  function renderAll(toRender) {
+    if (toRender.length === 0) {
+      return;
+      setTimeout(renderLoop, 30000);
+    }
+    render(toRender.shift(), function () {
+      process.stdout.write('\x1B[2J\x1B[0f');
+      console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!");
+      renderAll(toRender);
+    });
+  }
 
-//Main loop. This keeps running, rendering everything.
-function renderLoop() {
-  //execSync("cd roadside-to-json;sh convert.sh;cd ..");
-  renderAll(JSON.parse(JSON.stringify(renderList)));
+  //Main loop. This keeps running, rendering everything.
+  function renderLoop() {
+    //execSync("cd roadside-to-json;sh convert.sh;cd ..");
+    renderAll(JSON.parse(JSON.stringify(renderList)));
+  }
+  renderLoop();
 }
-renderLoop();
