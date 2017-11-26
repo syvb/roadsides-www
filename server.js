@@ -6,9 +6,11 @@ const http = require('http');
 const request = require('request');
 const puppeteer = require('puppeteer');
 const fs = require('fs')
+const bodyParser = require('body-parser');
+const exec = require('child_process').exec;
 
 const app = express();
-
+  
 var twitterChange = function (req, res, next) {
   var userAgent = req.headers['user-agent'];
   if (userAgent.startsWith('facebookexternalhit/1.1') ||
@@ -65,6 +67,42 @@ app.use(ecstatic({
    root: __dirname,
    showdir: true,
 }));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.set("renderPass", (process.argv.length > 2) ? process.argv[2] : "SuperSecretPassword");
+
+//Rerender Button
+app.get("/internal/render", function (req, res) {
+  res.send(200, 
+    `
+    <form action="/internal/submitRender" method="post">
+      <label for="rendPass">Render Password:</label> <input id="rendPass" name="rendPass" type="password" />
+      <button type="submit">Render LCRA!</button>
+    </form>
+    `
+  );
+});
+
+app.get("/internal/renderSuccess", function (req, res) {
+  res.send(200, 
+    `
+It worked! LCRA is being rendered.
+<a href="/internal/submitRender">Back</a>
+    `
+  );
+});
+
+app.post("/internal/submitRender", function (req, res) {
+  if (req.body.rendPass !== app.get("renderPass")) {
+    return setTimeout(function () {
+      res.send(401, "wrong password");
+    }, 5000);
+  }
+  res.redirect(302, "/internal/renderSuccess");
+  //Start render
+  exec("cd /home/server/roadside-www/images;git pull;cd ../roadside-to-json;sh convert.sh;cd ..;node newprerender");
+});
 
 http.createServer(app).listen(80);
 
