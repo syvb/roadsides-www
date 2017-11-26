@@ -45,7 +45,7 @@ var twitterChange = function (req, res, next) {
 
 app.use("/", function (req, res, next) {
   //apply any needed redirects
-  if (req.path.startsWith("/internal") {
+  if (req.path.startsWith("/internal")) {
       return next();
   }
   if (req.path.endsWith(".jpg") && (req.url.indexOf("/images") === -1)) {
