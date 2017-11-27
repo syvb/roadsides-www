@@ -104,7 +104,7 @@ app.post("/internal/submitRender", function (req, res) {
   }
   res.redirect(302, "/internal/renderSuccess");
   //Start render
-  exec("cd /home/server/roadside-www/images;git pull;cd ../roadside-to-json;sh convert.sh;cd ..;node newprerender");
+  exec("cd /home/server/roadside-www/images;git pull;cd ../roadside-to-json;sh convert.sh;cd ..;forever newprerender.js");
 });
 
 http.createServer(app).listen(80);
