@@ -103,7 +103,7 @@ app.post("/internal/submitRender", function (req, res) {
     }, 5000);
   }
   //Start render
-  exec("cd /home/server/roadsides-www/images;git pull ssh://git@github.com/Smittyvb/roadside-images;cd ../roadside-to-json;sh convert.sh;cd ..;forever start newprerender.js", function () {
+  exec("cd /home/server/roadsides-www/images;git pull ssh://git@github.com/Smittyvb/roadside-images;cd ../roadside-to-json;sh convert.sh;cd ..;forever -m 0 start newprerender.js", function () {
     res.redirect(302, "/internal/renderSuccess");
   });
 });
