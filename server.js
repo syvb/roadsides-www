@@ -102,9 +102,10 @@ app.post("/internal/submitRender", function (req, res) {
       res.send(401, "wrong password");
     }, 5000);
   }
-  res.redirect(302, "/internal/renderSuccess");
   //Start render
-  exec("cd /home/server/roadside-www/images;git pull;cd ../roadside-to-json;sh convert.sh;cd ..;forever newprerender.js");
+  exec("cd /home/server/roadside-www/images;git pull;cd ../roadside-to-json;sh convert.sh;cd ..;forever start newprerender.js", function () {
+    res.redirect(302, "/internal/renderSuccess");
+  });
 });
 
 http.createServer(app).listen(80);
