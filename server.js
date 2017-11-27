@@ -91,7 +91,7 @@ app.get("/internal/renderSuccess", function (req, res) {
   res.send(200, 
     `
 It worked! LCRA is being rendered.
-<a href="/internal/submitRender">Back</a>
+<a href="/internal/render">Back</a>
     `
   );
 });
