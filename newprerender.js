@@ -81,7 +81,7 @@ if (options.file) {
   function renderAll(toRender) {
     if (toRender.length === 0) {
       return;
-      setTimeout(renderLoop, 30000);
+      //setTimeout(renderLoop, 30000);
     }
     render(toRender.shift(), function () {
       process.stdout.write('\x1B[2J\x1B[0f');
