@@ -53,7 +53,7 @@ const optionDefinitions = [{
   type: String,
   defaultOption: true
 }];
-const options = commandLineArgs(optionDefinitions);\
+const options = commandLineArgs(optionDefinitions);
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
