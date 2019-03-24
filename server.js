@@ -104,11 +104,11 @@ app.post("/internal/submitRender", function (req, res) {
   }
   //Start render
   res.redirect(302, "/internal/renderSuccess");
-  exec("cd /home/server/roadsides-www/images;git pull ssh://git@github.com/Smittyvb/roadside-images;cd ../roadside-to-json;sh convert.sh;kill $(fuser -n tcp 8443 2> /dev/null)", function () {
+  exec("cd /home/server/roadsides-www/images;git pull;cd ../roadside-to-json;sh convert.sh;sudo kill `sudo lsof -t -i:8443`", function () {
     exec("json-server /home/server/temp-api/roadsides.json --ro --port 8443 > /dev/null", function () {
     });
     setTimeout(function () {
-      exec("cd /home/server/roadsides-www;forever -m 0 start newprerender.js");
+      exec("cd /home/server/roadsides-www;sudo -H -u server forever -m 0 start newprerender.js");
     }, 10000);
   });
 });
