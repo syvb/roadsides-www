@@ -44,6 +44,9 @@ var twitterChange = function (req, res, next) {
 //app.use("/", twitterChange);
 
 app.use("/", function (req, res, next) {
+  //log
+  console.log("Request:", req.url, req.ip, req.get("X-Forwarded-For"));
+
   //apply any needed redirects
   if (req.path.startsWith("/internal")) {
       return next();
