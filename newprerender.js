@@ -7,13 +7,21 @@ const execSync = require("child_process").execSync;
 
 const ROADSIDE_LIST = "http://localhost:8443/roadsides";
 
-var renderList = [
+var renderList = [];
+
+JSON.parse(requestSync("GET", ROADSIDE_LIST).body.toString())
+  .forEach(function(roadside) {
+    renderList.push(roadside.url.substr(1, roadside.url.length));
+  });
+
+renderList = renderList.concat([
   "main",
   //static pages
   "contact",
   "founder",
   "pics",
   "province",
+  "map",
   //all roadsides page
   "alphabet",
   //province pages
@@ -40,13 +48,7 @@ var renderList = [
   "media",
   "extras",
   "submit",
-  "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"
-];
-
-JSON.parse(requestSync("GET", ROADSIDE_LIST).body.toString())
-  .forEach(function(roadside) {
-    renderList.push(roadside.url.substr(1, roadside.url.length));
-});
+  "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"]);
 
 const optionDefinitions = [{
   name: 'file',
