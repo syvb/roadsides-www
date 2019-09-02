@@ -2,7 +2,10 @@
 You can access our map multiple ways:
 <ul>
   <li><a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">On Google Maps</a> (may not work on iOS)</li>
-  <li>Download a KML:
-  <iframe src="https://www.eternum.io/user/usauozkiuzmgp/" style="border: 0;height: 300px;"></iframe>
+  <li>
+    Download a KML:<br>
+    <div>
+      <iframe src="https://www.eternum.io/user/usauozkiuzmgp/" style="border: 0;height: 300px;"></iframe>
+    </div>
   </li>
 </ul>
