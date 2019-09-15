@@ -14,7 +14,7 @@ JSON.parse(requestSync("GET", ROADSIDE_LIST).body.toString())
     renderList.push(roadside.url.substr(1, roadside.url.length));
   });
 
-renderList = renderList.concat([
+var sPages = [
   "main",
   //static pages
   "contact",
@@ -49,7 +49,8 @@ renderList = renderList.concat([
   "media",
   "extras",
   "submit",
-  "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"]);
+  "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"];
+renderList = renderList.concat(sPages);
 
 const optionDefinitions = [{
   name: 'file',
@@ -68,6 +69,12 @@ function render(roadsideUrl, cb) {
     html = html[0] +
       "<script src='hashtourl.js'></script>" +
       html[1].split("<!--END-->")[1];
+    var canShowAd = sPages.indexOf(sPages) === -1;
+    if (canShowAd && (Math.random() > 0.9)) {
+      html.replace("<!--AD-->", 
+`<a href="/roadside/merch"><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
+                   );
+    }
     output = "<!doctype html><html>" + html + "</html>";
     fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
       if (err) throw err;
