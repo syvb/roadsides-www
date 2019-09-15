@@ -22,6 +22,7 @@ renderList = renderList.concat([
   "pics",
   "province",
   "map",
+  "merch",
   //all roadsides page
   "alphabet",
   //province pages
