@@ -1,9 +1,9 @@
 <h1>Roadside Attraction map</h1>
-You can access our map multiple ways:
+Our map of large roadside attractions in Canada:<br>
 <ul>
   <li><a href="https://drive.google.com/open?id=1n9BYTMRAXcuawwWFeLr7Tqav2qc&usp=sharing">On Google Maps</a> (may not work on iOS)</li>
   <li>
-    Download a KML:<br>
+    Or download a KML file:<br>
     <div>
       <iframe src="https://www.eternum.io/user/usauozkiuzmgp/" style="border: 0;height: 300px;"></iframe>
     </div>
