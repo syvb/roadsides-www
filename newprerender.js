@@ -73,8 +73,9 @@ function render(roadsideUrl, cb) {
     var randomCanShowAd = Math.random();
     console.log(roadsideUrl, canShowAd, randomCanShowAd.toFixed(2));
     if (canShowAd && (randomCanShowAd > 0.5)) {
-      html.replace("<!--AD-->", 
-`<a href="/roadside/merch"><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
+      html = html.replace("<!--AD-->", 
+//`<a href="/roadside/merch"><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
+`<a href="/roadside/merch"><div style="padding-top: 9em;">Ad</div><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
                    );
     }
     output = "<!doctype html><html>" + html + "</html>";
