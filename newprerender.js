@@ -69,13 +69,13 @@ function render(roadsideUrl, cb) {
     html = html[0] +
       "<script src='hashtourl.js'></script>" +
       html[1].split("<!--END-->")[1];
-    var canShowAd = sPages.indexOf(roadsideUrl) === -1;
+    var canShowAd = false;//sPages.indexOf(roadsideUrl) === -1;
     var randomCanShowAd = Math.random();
     console.log(roadsideUrl, canShowAd, randomCanShowAd.toFixed(2));
     if (canShowAd && (randomCanShowAd > 0.5)) {
       html = html.replace("<!--AD-->", 
 //`<a href="/roadside/merch"><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
-`<a href="/roadside/merch"><div style="padding-top: 9em;">Ad</div><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
+`<a href="/roadside/merch"><div style="padding-top: 13em;">Ad</div><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
                    );
     }
     output = "<!doctype html><html>" + html + "</html>";
