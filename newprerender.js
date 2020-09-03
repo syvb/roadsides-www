@@ -14,6 +14,8 @@ JSON.parse(requestSync("GET", ROADSIDE_LIST).body.toString())
     renderList.push(roadside.url.substr(1, roadside.url.length));
   });
 
+console.log("got roadside list");
+
 var sPages = [
   "main",
   //static pages
@@ -61,7 +63,9 @@ const options = commandLineArgs(optionDefinitions);
 function render(roadsideUrl, cb) {
   puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
-    await page.goto('http://localhost:80/spa/#/' + roadsideUrl);
+    const pageUri = 'http://localhost:' + (process.env.ROADPORT || '80') + (process.env.NO_SPA_SUB ? '' : '/spa') + '/#/' + roadsideUrl;
+    console.log(pageUri);
+    await page.goto(pageUri);
     await page.waitFor(".loaded");
     var html = await page.evaluate(() => document.documentElement.outerHTML);
     html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
