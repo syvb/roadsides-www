@@ -12,8 +12,6 @@
     "fs-extra": "^1.0.0",
     "http-proxy": "^1.17.0",
     "jimp": "^0.16.1",
-    "node-horseman": "^3.1.1",
-    "phantomjs": "^2.1.7",
     "pngjs": "^3.4.0",
     "puppeteer": "^5.2.1",
     "request": "^2.88.0",
