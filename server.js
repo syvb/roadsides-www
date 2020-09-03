@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const ecstatic = require('ecstatic');
 const http = require('http');
 const request = require('request');
 const puppeteer = require('puppeteer');
@@ -69,10 +68,7 @@ app.use("/", function (req, res, next) {
   next();
 });
 
-app.use(ecstatic({
-   root: __dirname,
-   showdir: true,
-}));
+app.use(express.static(__dirname));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -116,6 +112,6 @@ app.post("/internal/submitRender", function (req, res) {
   });
 });
 
-http.createServer(app).listen(80);
+http.createServer(app).listen(process.env.ROADPORT ? parseInt(process.env.ROADPORT, 10) : 80);
 
 console.log('Started static server.');
