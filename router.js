@@ -1,5 +1,22 @@
 var Roadsides = window.Roadsides || {};
 Roadsides.API_LOC = "http://" + location.hostname + ":8443/"; //set to location of API server
+Roadsides.ARCHIVE_PROV_INFO = `
+<div style="text-align: left; width: 100%;max-width: 110rem;">
+  Archived roadsides for each province:
+  <a href="#/albertaarchived">Alberta</a>,
+  <a href="#/bcarchived">British Columbia</a>,
+  <a href="#/manitobaarchived">Manitoba</a>,
+  <a href="#/newbrunswickarchived">New Brunswick</a>,
+  <a href="#/nfldarchived">Newfoundland and Labrador</a>,
+  <a href="#/nwtarchived">Northwest Territories</a>,
+  <a href="#/novascotiaarchived">Nova Scotia</a>,
+  <a href="#/nunavutarchived">Nunavut</a>,
+  <a href="#/ontarioarchived">Ontario</a>,
+  <a href="#/peiarchived">Prince Edward Island</a>,
+  <a href="#/quebecarchived">Quebec</a>,
+  <a href="#/saskarchived">Saskatchewan</a>,
+  <a href="#/yukonarchived">Yukon</a>
+</div>`;
 /*
 Each item in the routing table is evaluated, in order from top to bottom.
 If one succeeds, then the program stop going through the table.
@@ -47,7 +64,7 @@ addEventListener("load", function() {
       html += "</table>";
       return html;
     },
-    dbQuery: function (query, title, whatsNew, limit) {
+    dbQuery: function (query, title, whatsNew, limit, archive) {
       var request = new XMLHttpRequest();
       request.onload = function (data) {
         var dbJson = JSON.parse(data.target.responseText);
@@ -55,6 +72,9 @@ addEventListener("load", function() {
           dbJson.reverse();
         }
         var html = Roadsides.Router.htmlFromRoadsideArray(dbJson, whatsNew, limit);
+        if (archive) {
+          html = Roadsides.ARCHIVE_PROV_INFO + html;
+        }
         document.getElementById("mainContent").innerHTML = "<div class='loaded'></div><h1>" + title + "</h1>" + html;
       };
       request.open("GET", Roadsides.API_LOC + "roadsides?" + query);
@@ -156,7 +176,7 @@ addEventListener("load", function() {
         if (pageName !== "archive") {
           return fail();
         }
-        Roadsides.Router.dbQuery("_sort=sortName&archive=TRUE", "Archive");
+        Roadsides.Router.dbQuery("_sort=sortName&archive=TRUE", "Archive", undefined, undefined, true);
       },
       function(pageName, fail) {
         if (pageName !== "whatsnew") {
