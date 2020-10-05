@@ -126,6 +126,18 @@ addEventListener("load", function() {
         Roadsides.Router.dbQuery("province=" + Roadsides.Router.provinceUrlMapping[pageName] + "&_sort=city&archive=FALSE",
           Roadsides.Router.provinceUrlMapping[pageName]);
       },
+      //province archived page
+      function(pageName, fail) {
+        //make sure we have a valid province url
+        let province = pageName.match(/^(\w+)archived$/);
+        if (province === null) return fail();
+        province = province[1];
+        if (Roadsides.Router.provinceUrlMapping[province] === undefined) {
+          return fail();
+        }
+        Roadsides.Router.dbQuery("province=" + Roadsides.Router.provinceUrlMapping[province] + "&_sort=city&archive=TRUE",
+          Roadsides.Router.provinceUrlMapping[province] + " - Archived");
+      },
       //alphabetical page
       function (pageName, fail) {
         if (pageName.length !== 1) {
