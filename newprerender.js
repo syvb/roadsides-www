@@ -60,14 +60,27 @@ const optionDefinitions = [{
   defaultOption: true
 }];
 const options = commandLineArgs(optionDefinitions);
+
+let pup = null;
+let pPage = null;
+async function getPup() {
+  if (pPage) return pPage;
+  console.log("launching pup");
+  pup = await puppeteer.launch({ product: "chrome" });
+  pPage = await pup.newPage();
+  pPage.setDefaultNavigationTimeout(0);
+  return pPage;
+}
+
 function render(roadsideUrl, cb) {
-  puppeteer.launch().then(async browser => {
-    const page = await browser.newPage();
+ getPup().then(async page => {
+    console.log("got pup");
+    try {
+    //const page = await browser.newPage();
     const pageUri = 'http://localhost:' + (process.env.ROADPORT || '80') + (process.env.NO_SPA_SUB ? '' : '/spa') + '/#/' + roadsideUrl;
-    console.log(pageUri);
     await page.goto(pageUri);
     await page.waitFor(".loaded");
-    var html = await page.evaluate(() => document.documentElement.outerHTML);
+    var html = await page.evaluate("document.documentElement.outerHTML");
     html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
     html = html.split("<!--NO-PRERENDER-->");
     html = html[0] +
@@ -86,7 +99,13 @@ function render(roadsideUrl, cb) {
     fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
       if (err) throw err;
     });
-    await browser.close();
+    } catch (e) {
+        console.log("render error", e);
+        pup = null; pPage = null;
+        pup.close();
+        setTimeout(() => render(roadsideUrl, cb), 7500);
+        return;
+    }
     cb();
   });
 }
@@ -95,22 +114,23 @@ if (options.file) {
     console.log("Rendered " + options.file);
   });
 } else {
-  function renderAll(toRender) {
+  function renderAll(toRender, cb) {
     if (toRender.length === 0) {
-      return;
+      return cb();
       //setTimeout(renderLoop, 30000);
     }
-    render(toRender.shift(), function () {
+    let name = toRender.shift();
+    render(name, function () {
       process.stdout.write('\x1B[2J\x1B[0f');
-      console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!");
-      renderAll(toRender);
+      console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!" + name);
+      renderAll(toRender, cb);
     });
   }
 
   //Main loop. This keeps running, rendering everything.
   function renderLoop() {
     //execSync("cd roadside-to-json;sh convert.sh;cd ..");
-    renderAll(JSON.parse(JSON.stringify(renderList)));
+    renderAll(JSON.parse(JSON.stringify(renderList)), () => { console.log("Done!"); process.exit(0); });
   }
   renderLoop();
 }
