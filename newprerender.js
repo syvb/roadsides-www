@@ -81,6 +81,7 @@ function render(roadsideUrl, cb) {
     const pageUri = 'http://localhost:' + (process.env.ROADPORT || '80') + (process.env.NO_SPA_SUB ? '' : '/spa') + '/#/' + roadsideUrl;
     await page.evaluate("document.title = 'Roadside Attractions'");
     await page.goto(pageUri);
+    await page.exec("window.PRERENDER = true;")
     await page.waitFor(".loaded", {timeout: 60000 * 3});
     await page.evaluate("document.querySelectorAll('.loaded').forEach(ele => ele.parentElement.removeChild(ele))");
     var html = await page.evaluate("document.documentElement.outerHTML");
