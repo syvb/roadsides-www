@@ -24,7 +24,7 @@ var sPages = [
   "pics",
   "province",
   "map",
-  "merch",
+  //"merch",
   //all roadsides page
   "alphabet",
   //province pages
@@ -64,12 +64,12 @@ const options = commandLineArgs(optionDefinitions);
 let pup = null;
 let pPage = null;
 async function getPup() {
-  if (pPage) return pPage;
-  console.log("launching pup");
-  pup = await puppeteer.launch({ product: "chrome" });
-  pPage = await pup.newPage();
-  pPage.setDefaultNavigationTimeout(0);
-  return pPage;
+  //if (pPage) return pPage;
+  //console.log("launching pup");
+  if (!pup) pup = await puppeteer.launch({ product: "chrome" });
+  let page = await pup.newPage();
+  //pPage.setDefaultNavigationTimeout(0);
+  return page;
 }
 
 function render(roadsideUrl, cb) {
