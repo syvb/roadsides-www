@@ -80,6 +80,7 @@ function render(roadsideUrl, cb) {
     const pageUri = 'http://localhost:' + (process.env.ROADPORT || '80') + (process.env.NO_SPA_SUB ? '' : '/spa') + '/#/' + roadsideUrl;
     await page.goto(pageUri);
     await page.waitFor(".loaded");
+    await page.evaluate("document.querySelectorAll('.loaded').forEach(ele => ele.parentElement.removeChild(ele))");
     var html = await page.evaluate("document.documentElement.outerHTML");
     html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
     html = html.split("<!--NO-PRERENDER-->");
