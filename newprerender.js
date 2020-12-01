@@ -64,12 +64,12 @@ const options = commandLineArgs(optionDefinitions);
 let pup = null;
 let pPage = null;
 async function getPup() {
-  //if (pPage) return pPage;
+  if (pPage) return pPage;
   //console.log("launching pup");
   if (!pup) pup = await puppeteer.launch({ product: "chrome" });
-  let page = await pup.newPage();
-  //pPage.setDefaultNavigationTimeout(0);
-  return page;
+  pPage = await pup.newPage();
+  pPage.setDefaultNavigationTimeout(0);
+  return pPage;
 }
 
 function render(roadsideUrl, cb) {
@@ -78,8 +78,9 @@ function render(roadsideUrl, cb) {
     try {
     //const page = await browser.newPage();
     const pageUri = 'http://localhost:' + (process.env.ROADPORT || '80') + (process.env.NO_SPA_SUB ? '' : '/spa') + '/#/' + roadsideUrl;
+    await page.evaluate("document.title = 'Roadside Attractions'");
     await page.goto(pageUri);
-    await page.waitFor(".loaded");
+    await page.waitFor(".loaded", {timeout: 60000});
     await page.evaluate("document.querySelectorAll('.loaded').forEach(ele => ele.parentElement.removeChild(ele))");
     var html = await page.evaluate("document.documentElement.outerHTML");
     html = html.replace(new RegExp('"#/', "g"), '"/roadside/');
