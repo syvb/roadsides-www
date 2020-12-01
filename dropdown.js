@@ -9,9 +9,9 @@ addEventListener("load", function() {
         return;
       }
       location.hash = "/" + selected;
-      Roadsides.Router.update();
+      if (Roadsides.Router) Roadsides.Router.update();
       e.target.selectedIndex = 0;
     });
   }
-  Roadsides.Router.update();
+  if (Roadsides.Router) { Roadsides.Router.update(); } else { $(".fotorama").fotorama(); }
 });

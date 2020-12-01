@@ -130,7 +130,8 @@ addEventListener("load", function() {
           
           document.title = roadsideData.name;
           setTimeout(function () {
-            $(".fotorama").fotorama();
+            // should be done in dropdown in prerendered:
+            // $(".fotorama").fotorama();
           }, 100);
           Roadsides.Router.highlightActive();
         });
