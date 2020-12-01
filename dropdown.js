@@ -13,5 +13,5 @@ addEventListener("load", function() {
       e.target.selectedIndex = 0;
     });
   }
-  if (Roadsides.Router) { Roadsides.Router.update(); } else { $(".fotorama").fotorama(); }
+  if (Roadsides.Router) { Roadsides.Router.update(); } else { setTimeout(() => $(".fotorama").fotorama(), 100); }
 });
