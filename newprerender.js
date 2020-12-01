@@ -73,6 +73,7 @@ async function getPup() {
 }
 
 function render(roadsideUrl, cb) {
+  if (page === "whatsnew") pup = null; // hack
  getPup().then(async page => {
     console.log("got pup");
     try {
