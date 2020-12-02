@@ -47,7 +47,7 @@ app.use("/", function (req, res, next) {
   console.log("Request:", req.url, req.ip, req.get("X-Forwarded-For"));
 
   //apply any needed redirects
-  if (req.path.startsWith("/internal")) {
+  if (req.path.startsWith("/internal") || req.path.startsWith("/map")) {
       return next();
   }
   if (req.path.endsWith(".jpg") && (req.url.indexOf("/images") === -1)) {
@@ -109,6 +109,14 @@ app.post("/internal/submitRender", function (req, res) {
     setTimeout(function () {
       exec("cd /home/server/roadsides-www;sudo -H -u server forever -m 0 start newprerender.js");
     }, 10000);
+  });
+});
+
+app.get("/map/:map", (req, res, next) => {
+  fs.readFile("../east-wholesaler/map/" + req.params.map, "utf-8", (err, data) => {
+    if (err) return next();
+    res.contentType("application/vnd.google-earth.kml+xml");
+    res.send(data);
   });
 });
 
