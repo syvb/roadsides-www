@@ -74,6 +74,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("renderPass", (process.argv.length > 2) ? process.argv[2] : "SuperSecretPassword");
 
+app.get("/roadside/map", (req, res) => res.redirect("/roadside/map.html"));
+
 //Rerender Button
 app.get("/internal/render", function (req, res) {
   res.send(200, 
