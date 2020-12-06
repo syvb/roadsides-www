@@ -113,7 +113,8 @@ app.post("/internal/submitRender", function (req, res) {
 });
 
 app.get("/map/:map", (req, res, next) => {
-  fs.readFile("../east-wholesaler/map/" + req.params.map, "utf-8", (err, data) => {
+  if (req.params.map.includes(".")) return next();
+  fs.readFile("../east-wholesaler/maps/" + req.params.map + "-roadsides.kml", "utf-8", (err, data) => {
     if (err) return next();
     res.contentType("application/vnd.google-earth.kml+xml");
     res.send(data);
