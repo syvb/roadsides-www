@@ -5,7 +5,22 @@ Our map of large roadside attractions in Canada:<br>
   <li>
     Or download a KML file:<br>
     <div>
-      <iframe src="https://www.eternum.io/user/usauozkiuzmgp/" style="border: 0;height: 300px;"></iframe>
+        <ul>
+          <li><a href="/map/world" download target="_blank">Canada</a><ul>
+          <li><a href="/map/alberta" download target="_blank">Alberta</a></li>
+          <li><a href="/map/british-columbia" download target="_blank">British Columbia</a></li>
+          <li><a href="/map/manitoba" download target="_blank">Manitoba</a></li>
+          <li><a href="/map/new-brunswick" download target="_blank">New Brunswick</a></li>
+          <li><a href="/map/newfoundland-and-labrador" download target="_blank">Newfoundland and Labrador</a></li>
+          <li><a href="/map/northwest-territories" download target="_blank">Northwest Territories</a></li>
+          <li><a href="/map/nova-scotia" download target="_blank">Nova Scotia</a></li>
+          <li><a href="/map/nunavut" download target="_blank">Nunavut</a></li>
+          <li><a href="/map/ontario" download target="_blank">Ontario</a></li>
+          <li><a href="/map/prince-edward-island" download target="_blank">Prince Edward Island</a></li>
+          <li><a href="/map/quebec" download target="_blank">Quebec</a></li>
+          <li><a href="/map/saskatchewan" download target="_blank">Saskatchewan</a></li>
+          <li><a href="/map/yukon" download target="_blank">Yukon</a></li>
+        </ul>
     </div>
   </li>
 </ul>
