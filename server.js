@@ -68,7 +68,7 @@ app.use("/", function (req, res, next) {
   next();
 });
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname, {extensions:["html"]}));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
