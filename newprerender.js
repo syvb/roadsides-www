@@ -85,7 +85,6 @@ function render(roadsideUrl, cb) {
     await page.waitFor(".loaded", {timeout: 60000 * 3});
     await page.evaluate("document.querySelectorAll('.loaded').forEach(ele => ele.parentElement.removeChild(ele))");
     var html = await page.evaluate("document.documentElement.outerHTML");
-    await
     html = html.split("<!--NO-PRERENDER-->");
     html = html[0] +
       "<script src='hashtourl.js'></script>" +
