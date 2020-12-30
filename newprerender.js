@@ -104,9 +104,9 @@ function render(roadsideUrl, cb) {
     });
     } catch (e) {
         console.log("render error", e);
-        pup = null; pPage = null;
-        pup.close();
-        setTimeout(() => render(roadsideUrl, cb), 7500);
+        //pup.close();
+        //pup = null; pPage = null;
+        //setTimeout(() => render(roadsideUrl, cb), 7500);
         return;
     }
     cb();
@@ -123,7 +123,9 @@ if (options.file) {
       //setTimeout(renderLoop, 30000);
     }
     let name = toRender.shift();
+    let timeout = setTimeout(() => {console.log("Stalled!"); pup.close(); pup = null; pPage = null; renderAll([name, ...toRender], cb); }, 180000)
     render(name, function () {
+      clearTimeout(timeout);
       process.stdout.write('\x1B[2J\x1B[0f');
       console.log( ( (1 - (toRender.length / renderList.length)) * 100).toFixed(1) + "% done!" + name);
       renderAll(toRender, cb);
