@@ -35,6 +35,7 @@ function sortName(name) {
 }
 
 initJson.forEach(function(roadside) {
+  try {
   curLineNum++;
   if (((roadside.productionReady !== "yes") && PRODUCTION) || roadside.url === undefined){
     return;
@@ -52,6 +53,7 @@ initJson.forEach(function(roadside) {
   roadside.line = curLineNum;
   
   outJson.push(roadside);
+  } catch (e) { console.log("error on", roadside, e); }
 });
 
 var output = JSON.stringify(outJson, null, 2);
