@@ -98,6 +98,7 @@ function render(roadsideUrl, cb) {
 `<a href="/roadside/merch"><div style="padding-top: 13em;">Ad</div><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
                    );
     }
+    html = html.replace(/RENDTIME/g, (new Date()).toUTCString());
     output = "<!doctype html><html>" + html + "</html>";
     fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
       if (err) throw err;
