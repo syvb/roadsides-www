@@ -37,11 +37,15 @@ function sortName(name) {
 initJson.forEach(function(roadside) {
   try {
   curLineNum++;
-  if (((roadside.productionReady !== "yes") && PRODUCTION) || roadside.url === undefined){
+  if (((roadside.productionReady !== "yes") && PRODUCTION) || roadside.name === undefined){
     return;
   }
   
-  roadside.url = roadside.url.replace("http://roadsideattractions.ca", "").replace(".html", "");
+  if (roadside.url && (roadside.url.trim() !== "")) {
+    roadside.url = roadside.url.replace("http://roadsideattractions.ca", "").replace(".html", "");
+  } else {
+    roadside.url = "/lcra" + curLineNum;
+  }
   roadside.sortName = sortName(roadside.name);
   roadside.name = cap(roadside.name);
   roadside.city = cap(roadside.city);
