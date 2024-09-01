@@ -77,32 +77,33 @@ function render(roadsideUrl, cb) {
  getPup().then(async page => {
     console.log("got pup");
     try {
-    //const page = await browser.newPage();
-    const pageUri = 'http://localhost:' + (process.env.ROADPORT || '80') + (process.env.NO_SPA_SUB ? '' : '/spa') + '/#/' + roadsideUrl;
-    await page.evaluate("document.title = 'Roadside Attractions'");
-    await page.goto(pageUri);
-    await page.evaluate("window.PRERENDER = true;")
-    await page.waitFor(".loaded", {timeout: 60000 * 3});
-    await page.evaluate("document.querySelectorAll('.loaded').forEach(ele => ele.parentElement.removeChild(ele))");
-    var html = await page.evaluate("document.documentElement.outerHTML");
-    html = html.split("<!--NO-PRERENDER-->");
-    html = html[0] +
-      "<script src='hashtourl.js'></script>" +
-      html[1].split("<!--END-->")[1];
-    var canShowAd = false;//sPages.indexOf(roadsideUrl) === -1;
-    var randomCanShowAd = Math.random();
-    console.log(roadsideUrl, canShowAd, randomCanShowAd.toFixed(2));
-    if (canShowAd && (randomCanShowAd > 0.5)) {
-      html = html.replace("<!--AD-->", 
-//`<a href="/roadside/merch"><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
-`<a href="/roadside/merch"><div style="padding-top: 13em;">Ad</div><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
-                   );
-    }
-    html = html.replace(/RENDTIME/g, (new Date()).toUTCString());
-    output = "<!doctype html><html>" + html + "</html>";
-    fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
-      if (err) throw err;
-    });
+      //const page = await browser.newPage();
+      const pageUri = 'http://localhost:' + (process.env.ROADPORT || '80') + (process.env.NO_SPA_SUB ? '' : '/spa') + '/#/' + roadsideUrl;
+      await page.evaluate("document.title = 'Roadside Attractions'");
+      await page.goto(pageUri);
+      await page.evaluate("window.PRERENDER = true;")
+      await page.waitFor(".loaded", {timeout: 60000 * 3});
+      await page.evaluate("document.querySelectorAll('.loaded').forEach(ele => ele.parentElement.removeChild(ele))");
+      var html = await page.evaluate("document.documentElement.outerHTML");
+      html = html.split("<!--NO-PRERENDER-->");
+      html = html[0] +
+        "<script src='hashtourl.js'></script>" +
+        html[1].split("<!--END-->")[1];
+      var canShowAd = false;//sPages.indexOf(roadsideUrl) === -1;
+      var randomCanShowAd = Math.random();
+      console.log(roadsideUrl, canShowAd, randomCanShowAd.toFixed(2));
+      if (canShowAd && (randomCanShowAd > 0.5)) {
+        html = html.replace("<!--AD-->", 
+  //`<a href="/roadside/merch"><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
+  `<a href="/roadside/merch"><div style="padding-top: 13em;">Ad</div><img src="https://ipfs.eternum.io/ipfs/QmZBAspszTBUhX7LpYPY4mvYM5sKHkbrJVZ6iEdqvknA83/lcra-ad1.jpg"></a>`
+                    );
+      }
+      html = html.replace(/RENDTIME/g, (new Date()).toUTCString());
+      output = "<!doctype html><html>" + html + "</html>";
+      fs.writeFile(__dirname + '/roadside/' + ((roadsideUrl === "main") ? "index" : roadsideUrl) + ".html", html, (err) => {
+        if (err) throw err;
+        cb();
+      });
     } catch (e) {
         console.log("render error", e);
         //pup.close();
@@ -110,7 +111,6 @@ function render(roadsideUrl, cb) {
         //setTimeout(() => render(roadsideUrl, cb), 7500);
         return;
     }
-    cb();
   });
 }
 if (options.file) {
