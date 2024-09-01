@@ -73,7 +73,7 @@ async function getPup() {
 }
 
 function render(roadsideUrl, cb) {
-  if (roadsideUrl === "whatsnew" || roadsideUrl === "alberta") { pup.close(); pup = null; pPage = null; }; // hack
+  if (roadsideUrl === "whatsnew" || roadsideUrl === "alberta" || roadsideUrl === "bc") { pup.close(); pup = null; pPage = null; }; // hack
  getPup().then(async page => {
     console.log("got pup");
     try {
